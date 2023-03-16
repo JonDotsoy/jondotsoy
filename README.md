@@ -1,9 +1,5 @@
 ### Hi there 👋
 
-
-
-<img src="https://github-readme-stats.vercel.app/api?username=jondotsoy&show_icons=true&theme=dark"/>
-
 <!--
 **JonDotsoy/jondotsoy** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
@@ -18,3 +14,7 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
+
+## 🔭 I'm currently working
+
+- [ICalendar.JS](https://github.com/JonDotsoy/icalendar.js) standard library to parser ICalendar based on [RFC5545](https://www.rfc-editor.org/rfc/rfc5545.txt)
