@@ -1,6 +1,8 @@
 ---
-tags: version, semver
-author: @jondotsoy
+tags:
+  - version
+  - semver
+author: "@jondotsoy"
 lang: es-CL
 ---
 
