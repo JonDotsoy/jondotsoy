@@ -30,7 +30,7 @@ Here are some ideas to get you started:
 
 Some experimental proyects.
 
-- [life-config](https://github.com/JonDotsoy/life-config) Subscrbe to remotly configurations like HTTP Source or a file stream source.
+- [life-config](https://github.com/JonDotsoy/life-config) Subscrbe to remotly configurations like HTTP Source or a file stream source. Install it with `npm i life-config`
 
 
 
