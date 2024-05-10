@@ -26,5 +26,12 @@ Here are some ideas to get you started:
 - [feature-branching](https://github.com/JonDotsoy/feature-branching) to best workflows
 
 
+## 🔬 Lab
+
+Some experimental proyects.
+
+- [life-config](https://github.com/JonDotsoy/life-config) Subscrbe to remotly configurations like HTTP Source or a file stream source.
+
+
 
 
