@@ -32,6 +32,7 @@ Some experimental proyects.
 - [life-config](https://github.com/JonDotsoy/life-config#readme) Subscrbe to remotly configurations like HTTP Source or file stream source. Install it with `npm i life-config`.
 - [artur](https://github.com/JonDotsoy/artur#readme) a litle and moder framework to write modern apps.
 - 👷 Open-KV
+- [Q-Project](https://github.com/JonDotsoy/q-project)
 
 
 
