@@ -1,0 +1,159 @@
+# yaml-language-server: $schema=file:///Users/jondotsoy/Repositories/jondotsoy/p/schema.json
+
+messages:
+  - system: |-
+      Eres un editor experto, dado una historia del usuario redacta un articulo que ira a un blog.
+      Escribe el articulo en español, usa un tono informal sin insultar al lector. Redacta el articulo como si fueras el mismo usuario.
+      Evita usar palabras como "vosotros"
+  - user: |-
+      Que es q project?
+
+      Es un proyecto que escribí una tarde para ayudarme a documentar mi documentación usando un modelo de inteligencia artificial con Ollama.
+
+      Con la aparición de ChatGPT comencé a experimentar mucho con los servicios que ofrece sobre todo lo use para resumir, y crear artículos o comentarios mas rápidos para completar asi los tickets y documentación de algunos códigos que publique. Con el paso del tiempo deje de usar ChatGPT y comencé con Ollama. y la experiencia es similar, asi que con el tiempo fui usando mas Ollama. pero el problema sigue siendo similar no existe una ui rápida y la mayoría de mis contribuciones lo hago en código con visual studio code.
+
+      Asi que para manejar el chat que luego le mando a Ollama cree este archivo YAML donde escribo la historia de la convección y luego mediante la api se la mando al modelo que Ollama necesita y finalmente guardo la respuesta en este mismo documento. Ahi visual studio code refresca cada cambio del archivo.
+
+      El proyecto en si no es muy complejo lo puedes descargar desde htts://github.com/jondotsoy/q-project.git y correrlo en tu computadora. Ademas prepare su instalador con brew solo ejecuta el comando `brew install jondotsoy/core/q`. 
+
+      Cuanto ya tengas instalado puedes usar el comando `q` en tu consola.
+
+      luego debes crear un archivo yaml como este.
+
+      ```yaml
+      messages:
+        - system: |-
+            El usuario solo enviara código. Debes documentar lo que hace y ser muy conciso.
+        - user: |-
+            ```ts
+            const helloWorld = () => {
+              console.log('Hello World');
+              return 'Hello World';
+            }
+      ```
+
+      y luego ejecutar el comando `q archivo.yaml` y listo. Ollama le dará la respuesta en un solo archivo. como se muestra abajo.
+
+      ```
+      messages:
+        - system: |-
+            El usuario solo enviara código. Debes documentar lo que hace y ser muy conciso.
+        - user: |-
+            ```ts
+            const helloWorld = () => {
+              console.log('Hello World');
+              return 'Hello World';
+            }
+        - assistant: |-
+            **Function:** `helloWorld`
+            **Description:** Logs "Hello World" to the console and returns the string "Hello World".
+            **Type:** TypeScript function.
+      ```
+
+      Claro no es perfecto, en la mayoría de los casos deberás experimentar bastante para conseguir la respuesta que mas te sirva. pero con esta herramienta optimizas mucho tu trabajo en el dia a dia. Bueno por lo menos a mi si me ayudo y espero que a ti igual.
+  - system: |-
+      al finalizar el documento crea una invitación para que que contribuyan al proyecto descargando el código desde GitHub o publicando cualquier problema con el proyecto dentro del repositorio.
+  - assistant: |-
+      **¿Qué es Q Project?**
+
+      Es un proyecto que escribí una tarde para ayudarme a documentar mi documentación usando un modelo de inteligencia artificial con Ollama.
+
+      Con la aparición de ChatGPT comencé a experimentar mucho con los servicios que ofrece, sobre todo lo uso para resumir y crear artículos o comentarios más rápidos para completar así los tickets y documentación de algunos códigos que publique. Con el paso del tiempo dejé de usar ChatGPT y comencé con Ollama. Y la experiencia es similar, así que con el tiempo fui usando más Ollama. Pero el problema sigue siendo similar: no existe una UI rápida y la mayoría de mis contribuciones lo hago en código con Visual Studio Code.
+
+      Así que para manejar el chat que luego le mando a Ollama cree este archivo YAML donde escribo la historia de la conversación y luego mediante la API se la mando al modelo que Ollama necesita y finalmente guardo la respuesta en este mismo documento. Allí, Visual Studio Code refresca cada cambio del archivo.
+
+      El proyecto en sí no es muy complejo. Lo puedes descargar desde https://github.com/jondotsoy/q-project.git y correrlo en tu computadora. Además, prepare su instalador con Brew solo ejecuta el comando `brew install jondotsoy/core/q`.
+
+      Cuando ya tengas instalado, puedes usar el comando `q` en tu consola.
+
+      Luego debes crear un archivo YAML como este:
+
+      ```yaml
+      messages:
+        - system: |-
+            El usuario solo enviara código. Debes documentar lo que hace y ser muy conciso.
+        - user: |-
+            ```ts
+            const helloWorld = () => {
+              console.log('Hello World');
+              return 'Hello World';
+            }
+      ```
+
+      Y luego ejecutar el comando `q archivo.yaml` y listo. Ollama le dará la respuesta en un solo archivo, como se muestra abajo.
+
+      ```
+      messages:
+        - system: |-
+            El usuario solo enviara código. Debes documentar lo que hace y ser muy conciso.
+        - user: |-
+            ```ts
+            const helloWorld = () => {
+              console.log('Hello World');
+              return 'Hello World';
+            }
+        - assistant: |-
+            **Function:** `helloWorld`
+            **Description:** Logs "Hello World" to the console and returns the string "Hello World".
+            **Type:** TypeScript function.
+      ```
+
+      Claro, no es perfecto. En la mayoría de los casos deberás experimentar bastante para conseguir la respuesta que más te sirva. Pero con esta herramienta optimizas mucho tu trabajo en el día a día. Bueno, por lo menos a mí sí me ayudó y espero que a ti igual.
+
+      **¿Quieres contribuir?**
+
+      ¡Por supuesto! Si quieres contribuir al proyecto o reportar algún problema, puedes descargar el código desde GitHub o publicar cualquier problema con el proyecto dentro del repositorio. ¡Espero tus contribuciones y mejorar juntos este proyecto!
+  - user: |-
+      en la sección contribuir agrega que pueden generar issues usando el mismo comando `q issue` que abrirá GitHub para que documentes el problema que tuviste.
+  - assistant: |-
+      **¿Qué es Q Project?**
+
+      Es un proyecto que escribí una tarde para ayudarme a documentar mi documentación usando un modelo de inteligencia artificial con Ollama.
+
+      Con la aparición de ChatGPT comencé a experimentar mucho con los servicios que ofrece, sobre todo lo uso para resumir y crear artículos o comentarios más rápidos para completar así los tickets y documentación de algunos códigos que publique. Con el paso del tiempo dejé de usar ChatGPT y comencé con Ollama. Y la experiencia es similar, así que con el tiempo fui usando más Ollama. Pero el problema sigue siendo similar: no existe una UI rápida y la mayoría de mis contribuciones lo hago en código con Visual Studio Code.
+
+      Así que para manejar el chat que luego le mando a Ollama cree este archivo YAML donde escribo la historia de la conversación y luego mediante la API se la mando al modelo que Ollama necesita y finalmente guardo la respuesta en este mismo documento. Allí, Visual Studio Code refresca cada cambio del archivo.
+
+      El proyecto en sí no es muy complejo. Lo puedes descargar desde https://github.com/jondotsoy/q-project.git y correrlo en tu computadora. Además, prepare su instalador con Brew solo ejecuta el comando `brew install jondotsoy/core/q`.
+
+      Cuando ya tengas instalado, puedes usar el comando `q` en tu consola.
+
+      Luego debes crear un archivo YAML como este:
+
+      ```yaml
+      messages:
+        - system: |-
+            El usuario solo enviara código. Debes documentar lo que hace y ser muy conciso.
+        - user: |-
+            ```ts
+            const helloWorld = () => {
+              console.log('Hello World');
+              return 'Hello World';
+            }
+      ```
+
+      Y luego ejecutar el comando `q archivo.yaml` y listo. Ollama le dará la respuesta en un solo archivo, como se muestra abajo.
+
+      ```
+      messages:
+        - system: |-
+            El usuario solo enviara código. Debes documentar lo que hace y ser muy conciso.
+        - user: |-
+            ```ts
+            const helloWorld = () => {
+              console.log('Hello World');
+              return 'Hello World';
+            }
+        - assistant: |-
+            **Function:** `helloWorld`
+            **Description:** Logs "Hello World" to the console and returns the string "Hello World".
+            **Type:** TypeScript function.
+      ```
+
+      Claro, no es perfecto. En la mayoría de los casos deberás experimentar bastante para conseguir la respuesta que más te sirva. Pero con esta herramienta optimizas mucho tu trabajo en el día a día. Bueno, por lo menos a mí sí me ayudó y espero que a ti igual.
+
+      **¿Quieres contribuir?**
+
+      ¡Por supuesto! Si quieres contribuir al proyecto o reportar algún problema, puedes crear un nuevo issue utilizando el comando `q issue` que abrirá GitHub para que documentes el problema que tuviste. ¡Espero tus contribuciones y mejorar juntos este proyecto!
+
+      ¡Gracias por leer!
