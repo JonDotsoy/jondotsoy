@@ -1,5 +1,4 @@
 ---
-published
 tags:
   - version
   - semver
