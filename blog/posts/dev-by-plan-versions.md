@@ -1,9 +1,11 @@
 ---
+published
 tags:
   - version
   - semver
 author: "@jondotsoy"
 lang: es-CL
+date: Apr 8 2024
 ---
 
 # Desarrollo basado Planificación de Versiones
