@@ -2,6 +2,10 @@
 lang: es-cl
 title: Como conectarse a Google Cloud Shell desde Visual Studio Code
 tags: 
+- GoogleCloudShell
+- VisualStudioCode
+- ssh
+- tutorial
 ---
 
 # Como conectarse a Google Cloud Shell desde Visual Studio Code
@@ -50,15 +54,15 @@ Por último, abre la terminal de comandos en Visual Studio Code y escribe `conne
 ![Visual studio code con opción connect to Host](assets/snap-vscode-with-option-connect-to-host.png)
 
 > Si esta opción no aparece puedes intentar instalar la extension [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)
-> [![alt text](image-6.png)](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)
+> [![Extension Remote - SSH on gallery](image-6.png)](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)
 
 Luego seleccionar el host de nuestra cloud-shell.
 
-![Extension Remote - SSH on gallery](assets/extension-remote-ssh-on-gallery.png)
+![Visual Studio Code select host 34.139.168.146](assets/extension-remote-ssh-on-gallery.png)
 
 Y Listo 🚀
 
-![Visual Studio Code select host 34.139.168.146](assets/visual-studio-code-select-host-34_139_168_146.png)
+![Visual Studio Code connected with Google Cloud Shell](assets/visual-studio-code-select-host-34_139_168_146.png)
 
 Ya estaríamos conectados a la cloud-shell sin problemas
 
