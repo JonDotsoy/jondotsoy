@@ -2,6 +2,7 @@
 lang: es-cl
 title: Como conectarse a Google Cloud Shell desde Visual Studio Code
 date: 2024-10-02T17:26:57.232Z
+author: jondotsoy
 tags: 
 - GoogleCloudShell
 - VisualStudioCode
