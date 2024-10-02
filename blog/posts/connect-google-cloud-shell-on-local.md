@@ -55,7 +55,7 @@ Por último, abre la terminal de comandos en Visual Studio Code y escribe `conne
 ![Visual studio code con opción connect to Host](connect-google-cloud-shell-on-local/assets/snap-vscode-with-option-connect-to-host.png)
 
 > Si esta opción no aparece puedes intentar instalar la extension [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)
-> [![Extension Remote - SSH on gallery](image-6.png)](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)
+> [![Extension Remote - SSH on gallery](connect-google-cloud-shell-on-local/image-6.png)](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)
 
 Luego seleccionar el host de nuestra cloud-shell.
 
