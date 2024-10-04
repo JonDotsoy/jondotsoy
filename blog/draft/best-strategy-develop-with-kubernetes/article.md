@@ -25,9 +25,14 @@ y entonces ¿por que hablo del *infierno de Kubernetes 😈*? por una simple raz
 
 ¿Es problema de Kubernetes estos problemas? No, Kubernetes cumple con su objetivo y es orquestar cargas de trabajo, pero como puede estar en mucha infraestructuras distintas no podemos evitar pensar en ellas cuando estamos creando nuestras formulas. En este articulo en especifico vamos a entender como usar Kubernetes desde local hasta producción.
 
-## No mas buildpack
+## Volvamos a ejecutar todo en Local
 
-Si ya estamos entrando al mundo cloud con herramientas orquestadoras, contenedores, etc. debemos parar de pensar en nuestra aplicaciones como un conjunto de pasos de código a servicio desplegado. Ojo, no quiero decir que no debamos esperar de una aplicación no se pueda desplegar mediante el push en un repositorio.
+![alt text](image-2.png)
 
-debemos entender que existen 2 grandes proceso clave. por una parte la compilación de nuestro código y por otro el despliegue de nuestros artefactos.
+Es común escuchar el ticket ya lo termine y cuando pasa al ambiente de staging o productivo todo falla. Si esto te ha pasado es posible que por hoy estés conforme ya cuando todo esta en el ambiente de pre-productivo, pero aun asi todo puede ir mal, ya sea por un secreto, por una configuración de recursos o simplemente por que no esta bien montado el servicio. Lo normal es que en el ambiente de staging comencemos a hacer todos los cambios para ver que nuestro servicio se monte bien y esto nos lleve a varias commits de infra cuando solo deberiamos tener 1. esto es ineficiente por todo el tiempo que nos lleva probar nuestras formulas en el ambiente preproductivo y eso si es que no hay pequeñas diferencias con el ambiente productivo.
 
+Desde hoy te invito a cargar el 100% de tus formulas en local, no importa que tanto artefacto necesites desplegar, si necesitas una computadora mas poderosa para soporta esa base de datos enterprise premium que la licencia cuesta 10.000.- dolares puedes o exigir una computadora mas grande o simplemente darte cuenta que tu infra alomejor necesita de una base de datos del tipo SaaS.
+
+Toda las formulas de tu aplicación a lo menos deben poder cargarse en local con [minikube](https://minikube.sigs.k8s.io/docs/start/?arch=/macos/arm64/stable/binary+download) o [talos](https://www.talos.dev/).
+
+Otro concejo que puedo dejar en este articulo es que ejecutes tantos nodos como sea necesario para tu aplicación, te puede dar señales de que tu aplicación tenga problemas cuando se escale. Otro error puede ser el monitoreo o el acceso a otros servicios, ya sea por que se encuentra en otro namespace o simplemente por que no especificaste el namespace en tus artefactos.
