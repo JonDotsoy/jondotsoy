@@ -10,13 +10,19 @@ tags:
 
 Este es el stack perfecto para publicar tus libarías js en [npm](https://www.npmjs.com) sin esfuerzo. Esta guía te quiero presentar una flujo de despliegue para pasar de código alojado en github a [NPM](https://www.npmjs.com).
 
-Comencemos primero con npm ([www.npmjs.com](https://www.npmjs.com)) este es un registry que usaremos para alojar todas nuestra librerías y aplicaciones escritas en javascript. y este sitio tiene una serie de reglas al momento de ser publicado algo de código.
+## Que es NPM
 
-- Puede ser publicado un paquete privado o publico. Si es privado tiene un costo que puedes revisar aquí https://www.npmjs.com/products
-- Todo paquete publicado debe tener una version, description y nombre
-- Toda actualización debe estar con una version superior a la previamente publicada
+([www.npmjs.com](https://www.npmjs.com)) este es un registry que usan por defecto node.js y bun para descargar dependencias de los proyectos cuando usamo `npm add` o `bun add`. Este registry es gratuito y si queremos compartir codigo entre la comunidad o nuestros proyectos es buena idea alojar este codigo aqui. Si bien permite guardar cualquier tipo de archivo lo normal es guardar archivos escritos en javascript.
 
-Es gracias a la para regla que nos impide publicar una version mas antigua es que debemos tener en consideración los generadores de versiones, entre los que podemos encontrar [sematic-release](https://github.com/semantic-release/semantic-release) y [release-please](https://github.com/googleapis/release-please). Esta herramienta nos dará un numero de version que podremos usar en nuestro proyecto mas adelante y 100% basado en el historial de commits.
+Ademoas tengo que mencionar que este sitio tiene una serie de reglas al momento de publicar algun código.
+
+- Cada paquete debe tener a lo menos un archivo `package.json` con una propiedad `title`, `version` y `description`. Tambien es buena idea agregar una propiedad `license`
+- Puede ser publicado un paquete privado o publico. Sin embargo de ser privado puede tener  tiene un costo que puedes revisar aquí https://www.npmjs.com/products
+- Toda actualización a un paquete ya publicado debe estar con una version superior a la previamente publicada
+- No se pueden remplazar paquetes ya publicados a no ser que tu seas el dueno de ese paquete
+- Todas las verciones deben seguir la convencion semver
+
+Es gracias a estas reglas que nos impide publicar una version mas antigua es que debemos tener en consideración los generadores de versiones, entre los que podemos encontrar [sematic-release](https://github.com/semantic-release/semantic-release) y [release-please](https://github.com/googleapis/release-please). Esta herramienta nos dará un numero de version que podremos usar en nuestro proyecto mas adelante y 100% basado en el historial de commits.
 
 ## Crear nuestro token para publicar
 
