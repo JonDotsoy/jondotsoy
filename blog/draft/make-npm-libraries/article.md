@@ -7,15 +7,15 @@ tags:
 
 # Nunca más `npm publish`
 
-Este es el stack perfecto para publicar tus librerías js en [npm](https://www.npmjs.com) sin esfuerzo. Esta guía te quiero presentar un flujo de despliegue para pasar de código alojado en github a [NPM](https://www.npmjs.com).
+Este es el stack perfecto para publicar tus librerías js en [npm](https://www.npmjs.com) sin esfuerzo. Esta guía te quiero presentar un flujo de despliegue para pasar de código alojado en github a [npm](https://www.npmjs.com).
 
-## Qué es NPM
+## Qué es npm
 
 ([www.npmjs.com](https://www.npmjs.com)) este es un registry que usan por defecto node.js y bun para descargar dependencias de los proyectos cuando usamos `npm add` o `bun add`. Este registry es gratuito y si queremos compartir código entre la comunidad o nuestros proyectos es buena idea alojar este código aquí. Si bien permite guardar cualquier tipo de archivo lo normal es guardar archivos escritos en javascript.
 
 Además tengo que mencionar que este sitio tiene una serie de reglas al momento de publicar algún código.
 
-- Cada paquete debe tener al menos un archivo `package.json` con una propiedad `title`, `version` y `description`. También es buena idea agregar una propiedad `license`
+- Cada paquete debe tener al menos un archivo `package.json` con una propiedad `name`, `version` y `description`. También es buena idea agregar una propiedad `license`
 - Puede ser publicado un paquete privado o público. Sin embargo, de ser privado puede tener tiene un costo que puedes revisar aquí https://www.npmjs.com/products
 - Toda actualización a un paquete ya publicado debe estar con una versión superior a la previamente publicada
 - No se pueden reemplazar paquetes ya publicados a no ser que tú seas el dueño de ese paquete
@@ -35,7 +35,7 @@ Vamos a ir al sitio https://www.npmjs.com/settings/jondotsoy/tokens
 
 ### Opción 2: Crear token desde la terminal
 
-Ejecuta el comando NPM `npm token create`
+Ejecuta el comando npm `npm token create`
 
 ## Paso 2: Preparemos el código de nuestro paquete
 
@@ -205,11 +205,11 @@ En la plantilla también podemos ver la variable de salida `release_created` es 
 
 ### Job `delivery-npm`
 
-Este job tiene como objetivo el publicar el código de nuestra librería a NPM pero antes valida si la variable `needs.release-please.outputs.release_created` es true. Esto es porque esperamos a que termine de actualizar la versión en el paso anterior de otro modo tendríamos un error constantemente por parte de NPM.
+Este job tiene como objetivo el publicar el código de nuestra librería a npm pero antes valida si la variable `needs.release-please.outputs.release_created` es true. Esto es porque esperamos a que termine de actualizar la versión en el paso anterior de otro modo tendríamos un error constantemente por parte de npm.
 
-Unos errores comunes en este paso es tener un token obsoleto. Podemos repetir el [Paso 1](#paso-1-crear-nuestro-token-para-publicar) y [actualizar en github el secreto](#secretos).
+Unos errores comunes en este paso es tener un token obsoleto. Podemos resolverlo si repetimos el [Paso 1](#paso-1-crear-nuestro-token-para-publicar) y [actualizar en github el secreto](#secretos).
 
 ## Conclusion
 
-En este artículo, hemos explorado un flujo de trabajo completo para publicar tus librerías JavaScript en npm, desde la creación de un token hasta la automatización del proceso de publicación. Hemos cubierto aspectos cruciales como la preparación del código, el empaquetado, las pruebas y la integración con herramientas de automatización como release-please. Ahora estás equipado con las herramientas y conocimientos necesarios para compartir tus creaciones con la comunidad de desarrolladores y contribuir al ecosistema de npm. ¡Feliz desarrollo!
+En definitiva, publicar tus librerías JavaScript en npm no tiene por qué ser una tarea tediosa. Siguiendo este flujo de trabajo, desde la generación de un token hasta la automatización del versionado y la publicación, podrás compartir tu código con la comunidad de manera eficiente y segura. Recuerda que cada paso, desde la preparación del código hasta las pruebas, es crucial para garantizar la calidad y la seguridad de tu librería. ¡Anímate a contribuir al ecosistema npm y a facilitar la vida de otros desarrolladores con tus creaciones!
 
