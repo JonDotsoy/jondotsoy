@@ -1,10 +1,9 @@
 ---
-author: '@jondotsoy'
+author: "@jondotsoy"
 tags:
-- npm
-- library
+  - npm
+  - library
 ---
-
 
 # Nunca mas `npm publish`
 
@@ -17,7 +16,7 @@ Este es el stack perfecto para publicar tus libarías js en [npm](https://www.np
 Ademoas tengo que mencionar que este sitio tiene una serie de reglas al momento de publicar algun código.
 
 - Cada paquete debe tener a lo menos un archivo `package.json` con una propiedad `title`, `version` y `description`. Tambien es buena idea agregar una propiedad `license`
-- Puede ser publicado un paquete privado o publico. Sin embargo de ser privado puede tener  tiene un costo que puedes revisar aquí https://www.npmjs.com/products
+- Puede ser publicado un paquete privado o publico. Sin embargo de ser privado puede tener tiene un costo que puedes revisar aquí https://www.npmjs.com/products
 - Toda actualización a un paquete ya publicado debe estar con una version superior a la previamente publicada
 - No se pueden remplazar paquetes ya publicados a no ser que tu seas el dueno de ese paquete
 - Todas las verciones deben seguir la convencion semver
@@ -32,7 +31,7 @@ El primer antes de publicar nuestro paquete sera el obtener un token para public
 
 > Prefiera este método dentro de lo posible.
 
-Vamos a ir al sitio https://www.npmjs.com/settings/jondotsoy/tokens 
+Vamos a ir al sitio https://www.npmjs.com/settings/jondotsoy/tokens
 
 ### Opción 2: Crear token desde la terminal
 
@@ -43,7 +42,7 @@ Ejecuta el comando NPM `npm token create`
 Bien, ya tenemos el token y ahora debemos pensar en el código que vamos a publicar.
 
 > Aquí te dejo unos concejos de seguridad:
-> 
+>
 > - Si requires configuraciones puedes hacer que tu código lo lea desde las variables de ambientes (`process.env`)
 > - No permitas cargar código desde tu librería sin un origen claro.
 
@@ -53,13 +52,13 @@ Lo mas importante es tener siempre disponible el código JS antes de ser publica
 
 ## Paso 3: Empaquetar el código
 
-Siempre es buena idea probar el código antes de publicar y para esto *npm* nos ofrece el comando `npm pack` este nos ayudara a crear un paquete comprimir.
+Siempre es buena idea probar el código antes de publicar y para esto _npm_ nos ofrece el comando `npm pack` este nos ayudara a crear un paquete comprimir.
 
 ![Ejemplo empaquetar código](make-npm-libraries/assets/sample-npm-pack-on-console.png)
 
 Cuando lo ejecutemos veremos por un lado el resultado del empaquetamiento y un archivo con extension `.tgz`, este archivo nos servirá para probarlos mas tarde.
 
-El command `npm pack` tiene un ciclo de vida que podemos aprovechar para compilar o preparar cualquier archivo si se necesita. 
+El command `npm pack` tiene un ciclo de vida que podemos aprovechar para compilar o preparar cualquier archivo si se necesita.
 
 El comando `npm pack` ejecuta en orden los siguientes scripts `prepack`, `prepare` y `postpack`.
 
@@ -88,7 +87,7 @@ Nuestro modulo debe tener un identificado un modulo de entrada, este es el scrip
 ```
 
 ```js
-require("sample-pack") // cargara el archivo `node_modules/sample-pack/index.js`
+require("sample-pack"); // cargara el archivo `node_modules/sample-pack/index.js`
 ```
 
 Revisa mas a detalle esta propiedad en la documentación de npm https://docs.npmjs.com/cli/v10/configuring-npm/package-json#main
@@ -135,4 +134,84 @@ Ahora solo nos hace falta ejecutar nuestras pruebas. Este tipo de pruebas las po
 ![run script index.ts](image-4.png)
 
 ## Paso 5: Automatizar publicación
+
+Ahora que tenemos listo nuestra librería ya podemos publicar en npm, pero para esto lo automatizaremos y para esto vamos a escribir un workflow que nos permita hacer 2 tareas:
+
+- automatiza el versionamiento de la librería. Recordemos que no podemos publicar una libaría en npm sin tener un declara y debe ser superior a la publicada anteriormente
+- automatizar la publicación de la librería a npm
+
+El script a continuación es una plantilla que podemos editar a nuestro gusto y esta plantilla tiene dos tareas para crear la version y publicar los cambios en npm cuando estos estén listos.
+
+```yaml
+name: Deploy Release
+
+on:
+  push:
+    branches:
+      - main
+
+# Required by release-please to make a PR
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    outputs:
+      release_created: ${{ steps.release-please.outputs.release_created }}
+    steps:
+      - name: release
+        id: release-please
+        uses: googleapis/release-please-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  # publish on npm
+  delivery-npm:
+    runs-on: ubuntu-latest
+    if: needs.release-please.outputs.release_created
+    needs:
+      - release-please
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - uses: actions/setup-node@v4
+        with:
+          registry-url: "https://registry.npmjs.org"
+      - run: bun install
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+```
+
+Expliquemos mas a detalles cada paso de la plantilla:
+
+### Secretos
+
+Como puedes ver en este archivo se usa el secreto `NPM_TOKEN`, debemos configurar aquí el token que obtuvimos en el [paso 1](#paso-1-crear-nuestro-token-para-publicar) podemos crear este secreto ya sea desde la consola de github o con el comando `gh secret set NPM_TOKEN`, usemos el que nos sea mas simple.
+
+### Job `release-please`
+
+La tarea `release-please` usa la herramienta [release-please](https://github.com/googleapis/release-please) para observar constantemente la rama `main` y según los commits proponer una nueva version en un PR.
+
+![alt text](image-1.png)
+
+Durante esta etapa ademas podemos automatizar algunos procesos como generar algún otro archivo con la version del package.json. por si nuestro proyecto lo require.
+
+> ℹ️ Si presentan algún problema en esta etapa seria bueno configurar tu proyecto de manera local con el comando `release-please bootstrap`
+
+En la plantilla también podemos ver la variable de salida `release_created` es importante en la siguiente etapa, ya que con ella podemos decidir si publicar o no nuestra variable.
+
+### Job `delivery-npm`
+
+Este job tiene como objetivo el publicar el código de nuestra librería a NPM pero antes valida si la variable `needs.release-please.outputs.release_created` es true. Esto es por que esperamos a que termine de actualizar la version en el paso anterior de otro modo tendríamos un error constantemente por parte de NPM.
+
+Unos errores comunes en este paso es tener un token obsoleto. Podemos repetir el [Paso 1](#paso-1-crear-nuestro-token-para-publicar) y [actualizar en github el secreto](#secretos).
+
+Otro error común es no tener todas las dependencias de nuestra librería, asegúrate de tener todo bien mapeado en el package.json.
+
+## Conclusion
+
+En este artículo, hemos explorado un flujo de trabajo completo para publicar tus librerías JavaScript en npm, desde la creación de un token hasta la automatización del proceso de publicación. Hemos cubierto aspectos cruciales como la preparación del código, el empaquetado, las pruebas y la integración con herramientas de automatización como release-please. Ahora estás equipado con las herramientas y conocimientos necesarios para compartir tus creaciones con la comunidad de desarrolladores y contribuir al ecosistema de npm. ¡Feliz desarrollo!
 
