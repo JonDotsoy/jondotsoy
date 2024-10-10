@@ -8,7 +8,7 @@ tags:
 
 # Nunca mas `npm publish`
 
-El stack perfecto para publicar tus libarías en [npm](https://www.npmjs.com) sin esfuerzo. Esta guía te quiero presentar una flujo de despliegue para pasar de código alojado en github a el [NPM](https://www.npmjs.com).
+Este es el stack perfecto para publicar tus libarías js en [npm](https://www.npmjs.com) sin esfuerzo. Esta guía te quiero presentar una flujo de despliegue para pasar de código alojado en github a [NPM](https://www.npmjs.com).
 
 Comencemos primero con npm ([www.npmjs.com](https://www.npmjs.com)) este es un registry que usaremos para alojar todas nuestra librerías y aplicaciones escritas en javascript. y este sitio tiene una serie de reglas al momento de ser publicado algo de código.
 
