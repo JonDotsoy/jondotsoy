@@ -24,9 +24,9 @@ Ademoas tengo que mencionar que este sitio tiene una serie de reglas al momento 
 
 Es gracias a estas reglas que nos impide publicar una version mas antigua es que debemos tener en consideración los generadores de versiones, entre los que podemos encontrar [sematic-release](https://github.com/semantic-release/semantic-release) y [release-please](https://github.com/googleapis/release-please). Esta herramienta nos dará un numero de version que podremos usar en nuestro proyecto mas adelante y 100% basado en el historial de commits.
 
-## Crear nuestro token para publicar
+## Paso 1: Crear nuestro token para publicar
 
-Ya sea que necesitemos un paquete privado o publico necesitaremos un token de NPM. Para publicar paquetes debemos tener en cuenta que necesitamos un token de NPM para esto tenemos 2 caminos:
+El primer antes de publicar nuestro paquete sera el obtener un token para publicar paquetes en npm y para esto podemos optar por 2 caminos:
 
 ### Opción 1: Crear token desde la WEB
 
@@ -38,7 +38,7 @@ Vamos a ir al sitio https://www.npmjs.com/settings/jondotsoy/tokens
 
 Ejecuta el comando NPM `npm token create`
 
-## Preparemos el código de nuestro paquete
+## Paso 2: Preparemos el código de nuestro paquete
 
 Bien, ya tenemos el token y ahora debemos pensar en el código que vamos a publicar.
 
@@ -51,7 +51,7 @@ Debemos pensar bien en quien sera el usuario librería o en otras palabras donde
 
 Lo mas importante es tener siempre disponible el código JS antes de ser publicado.
 
-## Empaquetar el código
+## Paso 3: Empaquetar el código
 
 Siempre es buena idea probar el código antes de publicar y para esto *npm* nos ofrece el comando `npm pack` este nos ayudara a crear un paquete comprimir.
 
@@ -110,6 +110,6 @@ Nuestro modulo puede tener muchos punto de entradas, estos pueden ser definidos 
 
 Revisa mas a detalle esta propiedad en la documentación de npm https://docs.npmjs.com/cli/v10/configuring-npm/package-json#exports
 
-## Probar código
+## Paso 4 (Opcional): Probar código
 
 Ya tenemos nuestro paquete, ahora podemos probarlo
