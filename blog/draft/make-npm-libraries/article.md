@@ -112,4 +112,27 @@ Revisa mas a detalle esta propiedad en la documentación de npm https://docs.npm
 
 ## Paso 4 (Opcional): Probar código
 
-Ya tenemos nuestro paquete, ahora podemos probarlo
+Yo realmente te recomiendo probar el paquete antes de seguir, es importante sobre todo para validar que los motores como nodejs puedan leer el paquete bien y si tienes definiciones de typescript también funcionen correctamente. Ademas que no es tan complejo, solo requerimos de un proyecto limpio o con el entorno que necesitamos.
+
+Este script crea un carpeta con un proyecto en bun limpio:
+
+```shell
+cd $TMPDIR
+mkdir my-project
+cd my-project
+
+bun init . -y
+```
+
+![salida en consola ejecutando el comando `ls --color`](image.png)
+
+Ahora necesitamos identificar el archivo tgz del paso 3 y instalar con el comando `bun add .../sample-pack-1.0.0.tgz` (En mi caso uso bun para la prueba pero se puede usar el mismo comando con npm `npm add .../sample-pack-1.0.0.tgz`).
+
+![instalando paquete hello-world-0.1.0.tgz](image-3.png)
+
+Ahora solo nos hace falta ejecutar nuestras pruebas. Este tipo de pruebas las podemos llamar de integración y tras ejecutar el script `index.ts` podemos ver en la salida el mensaje `hello world` que es ejecutado en el modulo y ver el mensaje `the variable is: ok` que ejecutamos en el script que importa el modulo.
+
+![run script index.ts](image-4.png)
+
+## Paso 5: Automatizar publicación
+
