@@ -1,5 +1,6 @@
 ---
 author: "@jondotsoy"
+description: Aprende a publicar tus librerías JavaScript en npm de forma fácil y automatizada. Esta guía te lleva paso a paso desde la creación de un token hasta la configuración de un flujo de trabajo en GitHub que se encarga del versionado y la publicación por ti.
 tags:
   - npm
   - library
