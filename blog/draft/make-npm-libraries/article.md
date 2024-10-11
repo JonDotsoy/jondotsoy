@@ -3,25 +3,44 @@ author: "@jondotsoy"
 tags:
   - npm
   - library
+createdAt: 2024-10-11T15:59:22.894Z
 ---
 
-# Nunca más `npm publish`
 
-Este es el stack perfecto para publicar tus librerías js en [npm](https://www.npmjs.com) sin esfuerzo. Esta guía te quiero presentar un flujo de despliegue para pasar de código alojado en github a [npm](https://www.npmjs.com).
+# Simplifica la publicación en npm con este flujo de trabajo
 
-## Qué es npm
+Este es el stack perfecto para publicar tus librerías de JavaScript en [npm](https://www.npmjs.com) sin esfuerzo. Esta guía quiere presentar un flujo de despliegue para pasar de código alojado en github a [npm](https://www.npmjs.com). Con el fin de evitar la mayoría de los errores humanos al mantener un flujo de trabajo claro y simple.
 
-([www.npmjs.com](https://www.npmjs.com)) este es un registry que usan por defecto node.js y bun para descargar dependencias de los proyectos cuando usamos `npm add` o `bun add`. Este registry es gratuito y si queremos compartir código entre la comunidad o nuestros proyectos es buena idea alojar este código aquí. Si bien permite guardar cualquier tipo de archivo lo normal es guardar archivos escritos en javascript.
+**Contenido:**
 
-Además tengo que mencionar que este sitio tiene una serie de reglas al momento de publicar algún código.
+- [Por que npm](#por-que-npm)
+- [Paso 1: Crear nuestro token para publicar](#paso-1-crear-nuestro-token-para-publicar)
+  - [Opción 1: Crear token desde la WEB](#opción-1-crear-token-desde-la-web)
+  - [Opción 2: Crear token desde la terminal](#opción-2-crear-token-desde-la-terminal)
+- [Paso 2: Preparación del código para publicación](#paso-2-preparación-del-código-para-publicación)
+- [Paso 3: Empaquetar el código](#paso-3-empaquetar-el-código)
+  - [Puntos de entrada (Propiedad `main`)](#puntos-de-entrada-propiedad-main)
+  - [Múltiples puntos de entrada (Propiedad `exports`)](#múltiples-puntos-de-entrada-propiedad-exports)
+- [Paso 4 (Opcional): Probar código](#paso-4-opcional-probar-código)
+- [Paso 5: Automatizar publicación](#paso-5-automatizar-publicación)
+  - [Secretos](#secretos)
+  - [Job `release-please`](#job-release-please)
+  - [Job `delivery-npm`](#job-delivery-npm)
+- [Conclusion](#conclusion)
+
+## Por que npm
+
+([www.npmjs.com](https://www.npmjs.com)) este es un registry que usan por defecto node.js y bun para descargar dependencias de los proyectos cuando usamos `npm add` o `bun add`. Este registry es gratuito y si queremos compartir código entre la comunidad o nuestros proyectos es buena idea alojar este código aquí. Si bien permite guardar cualquier tipo de archivo, lo normal es guardar archivos escritos en JavaScript.
+
+Además, es importante mencionar que este sitio tiene una serie de reglas al momento de publicar código:
 
 - Cada paquete debe tener al menos un archivo `package.json` con una propiedad `name`, `version` y `description`. También es buena idea agregar una propiedad `license`
-- Puede ser publicado un paquete privado o público. Sin embargo, de ser privado puede tener tiene un costo que puedes revisar aquí https://www.npmjs.com/products
-- Toda actualización a un paquete ya publicado debe estar con una versión superior a la previamente publicada
+- Puede ser publicado un paquete privado o público. Sin embargo, de ser privado puede tener tiene un costo que puedes revisar aquí (npmjs.com/products)[https://www.npmjs.com/products].
+- Toda actualización de un paquete ya publicado debe tener una versión superior a la anterior.
 - No se pueden reemplazar paquetes ya publicados a no ser que tú seas el dueño de ese paquete
 - Todas las versiones deben seguir la convención semver
 
-Es gracias a estas reglas que nos impide publicar una versión más antigua es que debemos tener en consideración los generadores de versiones, entre los que podemos encontrar [sematic-release](https://github.com/semantic-release/semantic-release) y [release-please](https://github.com/googleapis/release-please). Esta herramienta nos dará un número de versión que podremos usar en nuestro proyecto más adelante y 100% basado en el historial de commits.
+Debido a estas reglas que impiden publicar versiones antiguas, es importante considerar el uso de generadores de versiones, entre los que podemos encontrar [sematic-release](https://github.com/semantic-release/semantic-release) o [release-please](https://github.com/googleapis/release-please). Estas herramientas nos ofrecerán un número de versión que podremos usar en nuestro proyecto más adelante y 100% basado en el historial de commits.
 
 ## Paso 1: Crear nuestro token para publicar
 
@@ -37,7 +56,7 @@ Vamos a ir al sitio https://www.npmjs.com/settings/jondotsoy/tokens
 
 Ejecuta el comando npm `npm token create`
 
-## Paso 2: Preparemos el código de nuestro paquete
+## Paso 2: Preparación del código para publicación
 
 Bien, ya tenemos el token y ahora debemos pensar en el código que vamos a publicar.
 
@@ -46,7 +65,7 @@ Bien, ya tenemos el token y ahora debemos pensar en el código que vamos a publi
 > - Si requieres configuraciones puedes hacer que tu código lo lea desde las variables de ambientes (`process.env`)
 > - No permitas cargar código desde tu librería sin un origen claro.
 
-Debemos pensar bien en quién será el usuario librería o en otras palabras dónde será ejecutado el código, este puede ser un navegador, un entorno con NodeJS, BunJS o Deno. Si no tenemos claro el entorno podemos siempre asumir que será un entorno que ejecute soporte javascript [TC39](https://tc39.es/).
+Debemos pensar bien en quién será el usuario librería o en otras palabras dónde será ejecutado el código, este puede ser un navegador, un entorno con NodeJS, BunJS o Deno. Si no tenemos claro el entorno podemos siempre asumir que será un entorno que ejecute soporte JavaScript [TC39](https://tc39.es/).
 
 Lo más importante es tener siempre disponible el código JS antes de ser publicado.
 
@@ -66,17 +85,17 @@ El comando `npm pack` ejecuta en orden los siguientes scripts `prepack`, `prepar
 {
     ...
     "scripts": {
-        "prepack": "Este script es ejecutado previo al empaquetamiento",
-        "prepare": "Este script se ejecuta después de prepack y antes de empaquetar",
-        "postpack": "Este script se ejecuta después de empaquetamiento (puede ser útil para limpiar archivos)"
+        "prepack": "Es ejecutado previo al empaquetamiento",
+        "prepare": "Se ejecuta después de prepack y antes de empaquetar",
+        "postpack": "Se ejecuta después de empaquetamiento (puede ser útil para limpiar archivos)"
     }
     ...
 }
 ```
 
-## Puntos de entrada (main y exports)
+### Puntos de entrada (Propiedad `main`)
 
-Nuestro módulo debe tener un identificado un módulo de entrada, este es el script que cargará cuando sea importado por nuestra aplicación, para esto usaremos la propiedad `main` del `package.json`.
+Cuando importemos nuestro modulo ya sea con `require` o `import` el modulo necesita un script principal, esto lo definimos con la propiedad `main` del `package.json`.  Con esta propiedad vamos a declarar que archivo debe cargar cuando el modulo sea importando.
 
 ```json
 {
@@ -90,11 +109,11 @@ Nuestro módulo debe tener un identificado un módulo de entrada, este es el scr
 require("sample-pack"); // cargará el archivo `node_modules/sample-pack/index.js`
 ```
 
-Revisa más a detalle esta propiedad en la documentación de npm https://docs.npmjs.com/cli/v10/configuring-npm/package-json#main
+Puedes revisar más a detalle esta propiedad en la documentación de npm https://docs.npmjs.com/cli/v10/configuring-npm/package-json#main
 
-### Múltiples puntos de entrada
+### Múltiples puntos de entrada (Propiedad `exports`)
 
-Nuestro módulo puede tener muchos puntos de entradas, estos pueden ser definidos usando la propiedad `exports` del `package.json`, la idea de exportar varios scripts es útil si queremos exportar varias utilidades y a su vez disminuir el tamaño del proyecto del cliente final.
+Adicionalmente a la script principal podemos definir sub rutas a nuestro modulo con la propiedad `exports` del `package.json`. La idea de exportar varios scripts es útil si queremos exportar varias utilidades y a su vez disminuir el tamaño del proyecto del cliente final.
 
 ```json
 {
@@ -107,13 +126,13 @@ Nuestro módulo puede tener muchos puntos de entradas, estos pueden ser definido
 }
 ```
 
-Revisa más a detalle esta propiedad en la documentación de npm https://docs.npmjs.com/cli/v10/configuring-npm/package-json#exports
+Puedes revisar más a detalle esta propiedad en la documentación de npm https://docs.npmjs.com/cli/v10/configuring-npm/package-json#exports
 
 ## Paso 4 (Opcional): Probar código
 
 Yo realmente te recomiendo probar el paquete antes de seguir, es importante sobre todo para validar que los motores como nodejs puedan leer el paquete bien y si tienes definiciones de typescript también funcionen correctamente. Además que no es tan complejo, solo requerimos de un proyecto limpio o con el entorno que necesitamos.
 
-Este script crea una carpeta con un proyecto en bun limpio:
+El siguiente script crea una carpeta con un proyecto en bun limpio:
 
 ```shell
 cd $TMPDIR
@@ -121,11 +140,12 @@ mkdir my-project
 cd my-project
 
 bun init . -y
+# Si prefieres npm puedes usar `npm init -y`
 ```
 
 ![salida en consola ejecutando el comando `ls --color`](image.png)
 
-Ahora necesitamos identificar el archivo tgz del paso 3 e instalar con el comando  `bun add .../sample-pack-1.0.0.tgz` (En mi caso uso bun para la prueba pero se puede usar el mismo comando con npm `npm add .../sample-pack-1.0.0.tgz`).
+Ahora necesitamos identificar el archivo tgz del paso 3 e instalar con el comando `bun add .../sample-pack-1.0.0.tgz` (En mi caso uso bun para la prueba pero se puede usar el mismo comando con npm `npm add .../sample-pack-1.0.0.tgz`).
 
 ![instalando paquete hello-world-0.1.0.tgz](image-3.png)
 
@@ -195,7 +215,7 @@ Como puedes ver en este archivo se usa el secreto `NPM_TOKEN`, debemos configura
 
 La tarea `release-please` usa la herramienta [release-please](https://github.com/googleapis/release-please) para observar constantemente la rama main y según los commits proponer una nueva versión en un PR.
 
-![alt text](image-1.png)
+![captura de pantalla de PR creado con release-please](image-1.png)
 
 Durante esta etapa además podemos automatizar algunos procesos como generar algún otro archivo con la versión del package.json. por si nuestro proyecto lo requiere.
 
@@ -207,9 +227,8 @@ En la plantilla también podemos ver la variable de salida `release_created` es 
 
 Este job tiene como objetivo el publicar el código de nuestra librería a npm pero antes valida si la variable `needs.release-please.outputs.release_created` es true. Esto es porque esperamos a que termine de actualizar la versión en el paso anterior de otro modo tendríamos un error constantemente por parte de npm.
 
-Unos errores comunes en este paso es tener un token obsoleto. Podemos resolverlo si repetimos el [Paso 1](#paso-1-crear-nuestro-token-para-publicar) y [actualizar en github el secreto](#secretos).
+Un error común en este paso, es tener un token obsoleto; Podemos resolverlo si repetimos el [Paso 1](#paso-1-crear-nuestro-token-para-publicar) y [actualizar en github el secreto](#secretos).
 
 ## Conclusion
 
 En definitiva, publicar tus librerías JavaScript en npm no tiene por qué ser una tarea tediosa. Siguiendo este flujo de trabajo, desde la generación de un token hasta la automatización del versionado y la publicación, podrás compartir tu código con la comunidad de manera eficiente y segura. Recuerda que cada paso, desde la preparación del código hasta las pruebas, es crucial para garantizar la calidad y la seguridad de tu librería. ¡Anímate a contribuir al ecosistema npm y a facilitar la vida de otros desarrolladores con tus creaciones!
-
