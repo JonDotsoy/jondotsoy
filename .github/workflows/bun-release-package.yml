@@ -4,7 +4,10 @@ on:
   workflow_call:
     secrets:
       NPM_TOKEN:
+        required: true
         description: NPM Token to publish package
+      GITHUB_TOKEN:
+        required: true
 
 jobs:
   release-please:
