@@ -27,6 +27,9 @@ jobs:
     if: needs.release-please.outputs.release_created
     needs:
       - release-please
+    environment:
+        name: npm
+        url: ${{ steps.generate_page_url.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
@@ -37,3 +40,8 @@ jobs:
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - id: generate_page_url
+        run: |
+          pkg_name=$(cat package.json | jq '.name' -r)
+          pkg_version=$(cat package.json | jq '.version' -r)
+          echo "page_url=https://www.npmjs.com/package/${pkg_name}/v/${pkg_version}" > "$GITHUB_OUTPUT"
