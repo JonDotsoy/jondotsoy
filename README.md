@@ -17,7 +17,8 @@ Here are some ideas to get you started:
 
 ## 🔭 I'm currently working
 
-- [your-life-in-weeks](https://github.com/JonDotsoy/your-life-in-weeks?tab=readme-ov-file) This project is inspired by the article "Your Life in Weeks" published on Wait But Why, where Tim Urban illustrates the structure of a person's life from conception to old age. 
+- ⭐ [actioman](https://github.com/JonDotsoy/actioman) Comparte funciones con otros clientes JS. Llama a funciones del backend con type-safety.
+- [your-life-in-weeks](https://github.com/JonDotsoy/your-life-in-weeks?tab=readme-ov-file) This project is inspired by the article "Your Life in Weeks" published on Wait But Why, where Tim Urban illustrates the structure of a person's life from conception to old age.
 - [streamable-tools](https://github.com/JonDotsoy/streamable-tools) `streamable-tools` is a JS/TS library for easy stream manipulation in web apps, offering utilities like `MultiplyStream` for data propagation, `SplitStream` for data splitting, and tools for stream creation and control. Install with `npm add streamable-tools`
 - [ICalendar.JS](https://github.com/JonDotsoy/icalendar.js) standard library to parser ICalendar based on [RFC5545](https://www.rfc-editor.org/rfc/rfc5545.txt)
 - [commands-help](https://github.com/JonDotsoy/commands-help) List of cammands for your shell
@@ -38,7 +39,9 @@ Some experimental proyects.
 
 - [ndate](https://github.com/JonDotsoy/ndate) Console command to render date on diferent formats. Install with `brew install jondotsoy/core/ndate`
 - [uid](https://github.com/JonDotsoy/uid) Generator of unique id with support to UUID, ULID, and ObjectID. Install with `brew install jondotsoy/core/uid`
+- [chelajs-website](https://github.com/Chelas-js/chelajs-website) Website for the Chelas-js community.
 
+## 🧑‍🤝‍🧑 Communities
 
-
-
+- [Javascript Chile](https://jschile.org/) Comunidad de Javascript de Chile.
+- [Tribu Latam](https://www.tribulatam.com/) Comunidad Latam, Fogones de infraestructura y IA.
