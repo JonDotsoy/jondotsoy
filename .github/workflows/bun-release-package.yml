@@ -6,6 +6,10 @@ on:
       release_created:
         description: Release created by release-please
         value: ${{ jobs.release-please.outputs.release_created }}
+      prs_created:
+        value: ${{ jobs.release-please.outputs.prs_created }}
+      pr:
+        value: ${{ jobs.release-please.outputs.pr }}
     secrets:
       NPM_TOKEN:
         required: true
@@ -19,6 +23,8 @@ jobs:
       pull-requests: write
     outputs:
       release_created: ${{ steps.release-please.outputs.release_created }}
+      prs_created: ${{ steps.release-please.outputs.prs_created }}
+      pr: ${{ steps.release-please.outputs.pr }}
     steps:
       - name: release
         id: release-please
