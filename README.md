@@ -42,6 +42,6 @@ Some experimental projects.
 
 ## 🧑‍🤝‍🧑 Communities
 
-- [Chelas.js](https://www.chelajs.cl/) Comunidad de Javascript de Chile.
+- [Chelas.js](https://www.chelajs.cl/) Comunidad de Javascript de Chile. We have successfully organized 2 meetups this year. Our first meetup was on January 11th at Cerveceria Berbazul Barrio Italia ([https://lu.ma/oz60roog](https://lu.ma/oz60roog)) and our second meetup was on February 22nd at Cerveceria HbH ([https://lu.ma/p3dvyve7](https://lu.ma/p3dvyve7)) with great success. We are planning our next meetup for March, dates to be confirmed. Check out all our events at [https://lu.ma/chelas.js](https://lu.ma/chelas.js).
 - [Javascript Chile](https://jschile.org/) Javascript Community from Chile.
 - [Tribu Latam](https://www.tribulatam.com/) Latam Community, Infrastructure and AI Fire Pit.
