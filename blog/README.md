@@ -1,15 +1,51 @@
 # Basic structure document
 
-Save the markdown document on `./draft` and the ready documento to publish on `./posts`.
+The purpose of this document is to provide a clear and concise guide for organizing and structuring markdown files within this repository. By adhering to a standardized format and directory structure, contributors can ensure consistency, improve collaboration, and streamline the content creation process.
 
-## Metadata
+## Document Organization
 
-- `title`
-- `tags`
-- `author`
-- `lang`
-- `date`
+To maintain a clear and efficient workflow, markdown documents are organized into two main directories:
 
+- `./draft`: This directory contains documents that are still in progress or under review. Each draft must be stored in its own dedicated folder following the format `./draft/<article name>/`. The article itself should be written in a file named `article.md` within this folder, serving as the root file for the article.
+
+- `./posts`: Once a document is finalized and ready for publication, it is moved to this directory. Similar to drafts, each published article must have its own folder following the format `./posts/<article name>/`, with the main content written in an `article.md` file.
+
+This structure ensures that each article is self-contained, making it easier to manage and distinguish between work-in-progress and published materials. For example:
+
+```
+./draft/example-article/
+  ├── article.md
+  ├── assets/
+      ├── image1.png
+      ├── diagram.svg
+
+./posts/example-article/
+  ├── article.md
+  ├── assets/
+      ├── image1.png
+      ├── diagram.svg
+```
+
+By adhering to this organization, contributors can maintain a clean and consistent repository structure.
+
+## Format
+
+The format of the markdown document follows a structured approach, starting with a metadata section enclosed in triple dashes (`---`). This metadata provides essential information about the document, such as its title, tags, author, language, and date. Below the metadata, the main content of the document is written using standard markdown syntax for headings, paragraphs, and other elements.
+
+### Metadata
+
+The metadata section is written in YAML format, a human-readable data serialization standard that is easy to write and understand. This section serves as a structured way to define key attributes of the document, providing essential information that can be used for categorization, searchability, and automation within the repository. By using YAML, contributors can ensure that the metadata is both machine-readable and user-friendly, facilitating better organization and integration with tools or workflows.
+
+Each property in the metadata section serves a specific purpose:
+
+- `title`: The title of the document, providing a concise and descriptive name for the content.
+- `summary`: A brief summary or description of the document's content, providing an overview of its purpose and key points.
+- `tags`: A list of keywords or topics associated with the document, useful for categorization and searchability.
+- `author`: The creator or contributor of the document, identified by their name or handle.
+- `lang`: The language and regional format of the document, specified using a language code in IETF BCP 47 format (e.g., `es-CL` for Spanish - Chile).
+- `date`: The publication or creation date of the document, formatted for clarity and reference. It is recommended to use the ISO 8601 format (`YYYY-MM-DD` or `YYYY-MM-DDTHH:mm:ssZ`) for consistency and to avoid ambiguity. This format also supports specifying the time, which can be useful for scheduling the publication of the article to go live at a precise moment.
+
+**Example:**
 
 ```md
 ---
@@ -19,7 +55,7 @@ tags:
   - semver
 author: "@jondotsoy"
 lang: es-CL
-date: Apr 8 2024
+date: 2024-04-08
 ---
 
 # Desarrollo basado Planificación de Versiones
@@ -27,3 +63,19 @@ date: Apr 8 2024
 Normalmente cuando tenemos un proyecto siempre comenzamos con una idea clara el problema a resolver y por eso el primer enfoque suele ser escribir un script rápido para probar la solución y el tamaño del código casi siempre está correlacionado al tamaño del problema. Y si tienes algo más de experiencia surge un nuevo enfoque que llega con la planificación donde se encuentran las etapas; escribir la funcionalidad, planificar y desarrollar.
 
 ```
+
+## Asset Management
+
+For each article, all related assets (such as images, videos, or other media files) must be stored in a dedicated `./assets/<file>` directory within the folder of the respective article. This ensures that all resources are organized and easily accessible, maintaining a clean and consistent structure.
+
+By keeping assets alongside their corresponding articles, contributors can avoid confusion and ensure that all necessary files are readily available for editing or publication. For example:
+
+```
+./posts/article-title/
+  ├── article.md
+  ├── assets/
+      ├── image1.png
+      ├── diagram.svg
+```
+
+This approach helps streamline the management of resources and improves the overall maintainability of the repository.
