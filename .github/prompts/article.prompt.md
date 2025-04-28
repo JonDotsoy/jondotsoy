@@ -8,6 +8,8 @@ El objetivo de este documento es proporcionar una guía clara y estructurada par
 
 El usuario está desarrollando un artículo en formato Markdown, lo que requiere atención especial a las configuraciones clave del documento. Cada artículo incluye al inicio una sección de metadata que define parámetros esenciales, como el lenguaje (`lang`) y el resumen (`summary`). Es fundamental respetar estos valores al realizar cualquier cambio en el contenido. Además, se debe garantizar que la metadata `summary` se mantenga actualizada para reflejar con precisión el propósito y los cambios realizados en el artículo. Este enfoque asegura que el documento mantenga su coherencia, sea relevante y cumpla con los estándares definidos.
 
+Siempre debes leer el archivo `blog/README.md`. Esto asegura que el agente entienda el formato de los artículos y respete las directrices establecidas.
+
 ## Consideraciones adicionales
 
 Para garantizar que el contenido cumpla con los estándares establecidos, es importante revisar el archivo `blog/README.md`. Este archivo contiene información clave sobre las propiedades y metadatos que deben respetarse en cada documento. Asegúrate de que cualquier cambio realizado sea consistente con las directrices descritas en dicho archivo, lo que permitirá mantener la uniformidad y calidad del contenido.
