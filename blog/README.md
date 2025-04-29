@@ -2,6 +2,21 @@
 
 The purpose of this document is to provide a clear and concise guide for organizing and structuring markdown files within this repository. By adhering to a standardized format and directory structure, contributors can ensure consistency, improve collaboration, and streamline the content creation process.
 
+<!-- TOC -->
+
+**Content**
+
+1. [Document Organization](#document-organization)
+2. [Format](#format)
+3. [Metadata](#metadata)
+4. [Asset Management](#asset-management)
+5. [Table of Contents Tags](#table-of-contents-tags)
+6. [Usage](#usage)
+7. [Example](#example)
+8. [Notes](#notes)
+
+<!-- /TOC -->
+
 ## Document Organization
 
 To maintain a clear and efficient workflow, markdown documents are organized into two main directories:
@@ -79,3 +94,31 @@ By keeping assets alongside their corresponding articles, contributors can avoid
 ```
 
 This approach helps streamline the management of resources and improves the overall maintainability of the repository.
+
+## Table of Contents Tags
+
+The `<!-- TOC -->` and `<!-- /TOC -->` tags are used to define a section in a document that represents the Table of Contents (TOC). These tags help in distinguishing the TOC from the rest of the document and can be used by tools or scripts to identify and update the TOC dynamically.
+
+### Usage
+
+Place these tags around the content that serves as the Table of Contents. This ensures that the TOC is clearly marked and can be easily managed or updated.
+
+- `<!-- TOC -->`: Marks the beginning of the Table of Contents section.
+- `<!-- /TOC -->`: Marks the end of the Table of Contents section.
+
+### Example
+
+```markdown
+<!-- TOC -->
+
+1. Introduction
+2. Key Concepts
+3. Examples
+<!-- /TOC -->
+```
+
+### Notes
+
+- Ensure that the content between these tags is properly formatted and updated to reflect the structure of the document.
+- These tags are particularly useful for automation tools that generate or maintain the Table of Contents.
+- The TOC should provide a clear and concise overview of the document's structure to improve navigation and readability.
