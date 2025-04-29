@@ -159,3 +159,7 @@ sequenceDiagram
 <!-- Como Ahora con estos conceptos como se consume un mensaje   -->
 
 ##
+
+---
+
+[![Comentarios](https://img.shields.io/github/issues-search/jondotsoy/jondotsoy?query=is%3Aissue%20label%3Aquestion%20article%3Acustom-queue%20&style=for-the-badge&label=Comentarios)](https://github.com/JonDotsoy/jondotsoy/issues/new?title=article:custom-queue:+&labels=question)
