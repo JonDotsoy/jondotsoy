@@ -12,6 +12,12 @@ summary: Aprende de forma sencilla qué es un sistema de colas, por qué es tan 
 
 # Crear tu propio sistema de colas
 
+<!-- badges -->
+
+[![Comentarios](https://img.shields.io/github/issues-search/jondotsoy/jondotsoy?query=is:issue+label:question+article:custom-queue+&style=flat-square&label=Comentarios)](https://github.com/JonDotsoy/jondotsoy/issues/new?title=article:custom-queue:+&labels=question)
+
+<!-- /badges -->
+
 <!-- Introducción -->
 
 ¿Te has preguntado cómo hacen las grandes aplicaciones para no colapsar cuando todos quieren hacer algo al mismo tiempo? La respuesta muchas veces está en las colas. Un sistema de colas es como una fila virtual donde los mensajes o tareas esperan su turno para ser atendidos. Así, los distintos componentes de una app pueden trabajar tranquilos, sin pisarse los talones. Las colas ayudan a que todo sea más escalable, tolerante a fallos y, sobre todo, mucho más ordenado. Hoy en día, si tienes una app con microservicios, eventos o simplemente muchos usuarios, seguro usas (o deberías usar) colas. Ejemplos famosos: Apache Kafka, RabbitMQ, Amazon SQS y Google Pub/Sub. Todos resuelven el mismo problema: que nada se pierda y que todo fluya.
@@ -160,6 +166,3 @@ sequenceDiagram
 
 ##
 
----
-
-[![Comentarios](https://img.shields.io/github/issues-search/jondotsoy/jondotsoy?query=is%3Aissue%20label%3Aquestion%20article%3Acustom-queue%20&style=for-the-badge&label=Comentarios)](https://github.com/JonDotsoy/jondotsoy/issues/new?title=article:custom-queue:+&labels=question)
