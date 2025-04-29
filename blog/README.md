@@ -8,12 +8,17 @@ The purpose of this document is to provide a clear and concise guide for organiz
 
 1. [Document Organization](#document-organization)
 2. [Format](#format)
-   1. [Metadata](#metadata)
+   - [Metadata](#metadata)
 3. [Asset Management](#asset-management)
 4. [Table of Contents Tags](#table-of-contents-tags)
-   1. [Usage](#usage)
-   2. [Example](#example)
-   3. [Notes](#notes)
+   - [Usage](#usage)
+   - [Example](#example)
+   - [Notes](#notes)
+5. [Interactive Badges](#interactive-badges)
+   - [Example](#example-1)
+   - [Badge Templates](#badge-templates)
+     - [Comments Badge](#comments-badge)
+   - [Notes](#notes-1)
 
 <!-- /TOC -->
 
