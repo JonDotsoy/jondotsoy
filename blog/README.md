@@ -8,12 +8,12 @@ The purpose of this document is to provide a clear and concise guide for organiz
 
 1. [Document Organization](#document-organization)
 2. [Format](#format)
-3. [Metadata](#metadata)
-4. [Asset Management](#asset-management)
-5. [Table of Contents Tags](#table-of-contents-tags)
-6. [Usage](#usage)
-7. [Example](#example)
-8. [Notes](#notes)
+   1. [Metadata](#metadata)
+3. [Asset Management](#asset-management)
+4. [Table of Contents Tags](#table-of-contents-tags)
+   1. [Usage](#usage)
+   2. [Example](#example)
+   3. [Notes](#notes)
 
 <!-- /TOC -->
 
