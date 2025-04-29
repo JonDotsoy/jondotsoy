@@ -76,7 +76,6 @@ date: 2024-04-08
 # Desarrollo basado Planificación de Versiones
 
 Normalmente cuando tenemos un proyecto siempre comenzamos con una idea clara el problema a resolver y por eso el primer enfoque suele ser escribir un script rápido para probar la solución y el tamaño del código casi siempre está correlacionado al tamaño del problema. Y si tienes algo más de experiencia surge un nuevo enfoque que llega con la planificación donde se encuentran las etapas; escribir la funcionalidad, planificar y desarrollar.
-
 ```
 
 ## Asset Management
@@ -123,3 +122,36 @@ Place these tags around the content that serves as the Table of Contents. This e
 - Ensure that the content between these tags is properly formatted and updated to reflect the structure of the document.
 - These tags are particularly useful for automation tools that generate or maintain the Table of Contents.
 - The TOC should provide a clear and concise overview of the document's structure to improve navigation and readability.
+
+## Interactive Badges
+
+The `<!-- BADGES -->` and `<!-- /BADGES -->` tags are used to define a section in a document that represents interactive badges. These badges provide quick access to relevant actions or information, such as viewing or adding comments for the article.
+
+### Example
+
+```markdown
+<!-- BADGES -->
+
+[![Comentarios](https://img.shields.io/github/issues-search/jondotsoy/jondotsoy?query=is:issue+label:question+article:custom-queue+&style=flat-square&label=Comentarios)](https://github.com/JonDotsoy/jondotsoy/issues/new?title=article:custom-queue:+&labels=question)
+
+<!-- /BADGES -->
+```
+
+### Badge Templates
+
+Below is a list of templates for badges that can be used in the articles. Replace `<article name>` with the specific name of the article as used in the `draft` or `posts` directories.
+
+#### Comments Badge
+
+```markdown
+[![Comentarios](https://img.shields.io/github/issues-search/jondotsoy/jondotsoy?query=is:issue+label:question+article:<article name>+&style=flat-square&label=Comentarios)](https://github.com/JonDotsoy/jondotsoy/issues/new?title=article:<article name>:+&labels=question)
+```
+
+- Replace `<article name>` with the article's folder name.
+- This badge links to the GitHub issues section for adding comments or questions related to the article.
+
+### Notes
+
+- Replace `custom-queue` in the badge URL with the specific article name to ensure the badge links to the correct comments section.
+- These badges enhance interactivity and provide a convenient way for readers to engage with the content.
+- Ensure the badge URLs are updated if the repository or article structure changes.
