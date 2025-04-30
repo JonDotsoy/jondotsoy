@@ -1,13 +1,16 @@
 ---
 title: Crear tu propio sistema de colas
 tags:
-  - arquitectura
-  - patrones
+  - colas
+  - arquitectura de software
+  - patrones de diseño
   - sistemas distribuidos
+  - escalabilidad
+  - tolerancia a fallos
 author: "@jondotsoy"
 lang: es-CL
 date: 2025-04-28
-summary: Aprende de forma sencilla qué es un sistema de colas, por qué es tan útil hoy en día y cómo puedes crear el tuyo propio, con ejemplos y explicaciones claras.
+summary: Descubre cómo funcionan los sistemas de colas, su importancia en aplicaciones modernas y aprende a construir uno desde cero con ejemplos prácticos y explicaciones detalladas.
 ---
 
 # Crear tu propio sistema de colas
@@ -20,18 +23,34 @@ summary: Aprende de forma sencilla qué es un sistema de colas, por qué es tan 
 
 <!-- Introducción -->
 
-¿Te has preguntado cómo hacen las grandes aplicaciones para no colapsar cuando todos quieren hacer algo al mismo tiempo? La respuesta muchas veces está en las colas. Un sistema de colas es como una fila virtual donde los mensajes o tareas esperan su turno para ser atendidos. Así, los distintos componentes de una app pueden trabajar tranquilos, sin pisarse los talones. Las colas ayudan a que todo sea más escalable, tolerante a fallos y, sobre todo, mucho más ordenado. Hoy en día, si tienes una app con microservicios, eventos o simplemente muchos usuarios, seguro usas (o deberías usar) colas. Ejemplos famosos: Apache Kafka, RabbitMQ, Amazon SQS y Google Pub/Sub. Todos resuelven el mismo problema: que nada se pierda y que todo fluya.
+¿Te has preguntado cómo las grandes aplicaciones logran mantenerse estables cuando miles de usuarios intentan realizar acciones al mismo tiempo? La respuesta, en muchos casos, está en los sistemas de colas. Una cola es como una fila virtual donde los mensajes o tareas esperan su turno para ser procesados. Esto permite que los diferentes componentes de una aplicación trabajen de manera coordinada, sin interferencias ni sobrecargas. Las colas son esenciales para lograr escalabilidad, tolerancia a fallos y un flujo de trabajo ordenado. Si tu aplicación utiliza microservicios, eventos o maneja un alto volumen de usuarios, es probable que ya estés usando (o deberías considerar usar) un sistema de colas. Ejemplos populares incluyen Apache Kafka, RabbitMQ, Amazon SQS y Google Pub/Sub. Todos ellos comparten un objetivo común: garantizar que los mensajes no se pierdan y que el sistema funcione de manera fluida.
 
-En este artículo te voy a mostrar cómo puedes armar tu propio sistema de colas desde cero. Vamos a ver los conceptos clave, para qué sirven realmente y cómo puedes adaptarlo a lo que necesitas, sin complicaciones.
+En este artículo, aprenderás cómo construir tu propio sistema de colas desde cero. Exploraremos los conceptos fundamentales, su utilidad práctica y cómo puedes adaptarlos a las necesidades específicas de tu proyecto, sin complicaciones.
+
+Crear tu propio sistema de colas te brinda una solución robusta para abordar desafíos relacionados con la persistencia, el mantenimiento y la escalabilidad. Al tener control total sobre el diseño e implementación, puedes personalizar el sistema para que se ajuste perfectamente a los requisitos de tu aplicación. Por ejemplo, estrategias como dividir las bases de datos según el hash del identificador del mensaje permiten distribuir la carga de manera eficiente, evitando cuellos de botella y mejorando el rendimiento. Además, este enfoque personalizado facilita la incorporación de nuevas funcionalidades a medida que tu sistema evoluciona, asegurando que sea flexible y capaz de adaptarse al crecimiento de tu negocio.
 
 <!-- TOC -->
 
-- [¿Qué es una cola y cómo funciona?](#qué-es-una-cola-y-cómo-funciona)
-  - [Funcionalidades clave de una cola](#funcionalidades-clave-de-una-cola)
-  - [Importancia de gestionar el tiempo de vida de los mensajes](#importancia-de-gestionar-el-tiempo-de-vida-de-los-mensajes)
-  - [Control sobre los reintentos](#control-sobre-los-reintentos)
-- [¿Qué es un consumidor?](#qué-es-un-consumidor)
-- [Diseñando nuestro sistema](#diseñando-nuestro-sistema) - [Reclamación de mensajes: propiedades `claimed_at` y `claimed_by`](#reclamación-de-mensajes-propiedades-claimed_at-y-claimed_by) - [Proceso de reclamación de mensajes](#proceso-de-reclamación-de-mensajes) - [Asignación de mensajes](#asignación-de-mensajes) - [Beneficios del mecanismo de reclamación](#beneficios-del-mecanismo-de-reclamación)
+**Tabla de Contenidos**
+
+1. [¿Qué es una cola y cómo funciona?](#qué-es-una-cola-y-cómo-funciona)
+2. [Funcionalidades clave de una cola](#funcionalidades-clave-de-una-cola)
+   - [Importancia de gestionar el tiempo de vida de los mensajes](#importancia-de-gestionar-el-tiempo-de-vida-de-los-mensajes)
+   - [Control sobre los reintentos](#control-sobre-los-reintentos)
+3. [¿Qué es un consumidor?](#qué-es-un-consumidor)
+4. [Diseñando nuestro sistema](#diseñando-nuestro-sistema)
+   - [Reclamación de mensajes: propiedades `claimed_at` y `claimed_by`](#reclamación-de-mensajes-propiedades-claimed_at-y-claimed_by)
+     - [Proceso de reclamación de mensajes](#proceso-de-reclamación-de-mensajes)
+     - [Asignación de mensajes](#asignación-de-mensajes)
+     - [Beneficios del mecanismo de reclamación](#beneficios-del-mecanismo-de-reclamación)
+5. [Ejemplo práctico con SQLite](#ejemplo-práctico-con-sqlite)
+   - [1. Creación de la base de datos y el esquema](#1-creación-de-la-base-de-datos-y-el-esquema)
+   - [2. Insertar mensajes en la cola](#2-insertar-mensajes-en-la-cola)
+   - [3. Reclamar y consultar mensajes](#3-reclamar-y-consultar-mensajes)
+   - [4. Eliminar mensajes procesados](#4-eliminar-mensajes-procesados)
+   - [5. Ejemplo completo: Clase QueueOnSQLite](#5-ejemplo-completo-clase-queueonsqlite)
+6. [Conclusión y agradecimientos](#conclusión-y-agradecimientos)
+
 <!-- /TOC -->
 
 ## ¿Qué es una cola y cómo funciona?
@@ -162,7 +181,194 @@ sequenceDiagram
     end
 ```
 
-<!-- Como Ahora con estos conceptos como se consume un mensaje   -->
+## Ejemplo práctico con SQLite
 
-##
+A continuación, veremos cómo implementar un sistema de colas simple usando SQLite. Este ejemplo está pensado para ser lo más sencillo posible, pero los conceptos pueden aplicarse a cualquier tecnología o lenguaje.
 
+### 1. Creación de la base de datos y el esquema
+
+La base de datos se crea automáticamente al iniciar el script. El siguiente SQL define la tabla principal de la cola:
+
+```sql
+CREATE TABLE IF NOT EXISTS queue (
+    id TEXT PRIMARY KEY,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    claimed_at TIMESTAMP NULL,
+    claimed_by TEXT NULL,
+    data TEXT NOT NULL
+);
+```
+
+> Nota: Este esquema es una versión simplificada del modelo general presentado antes, ideal para un primer acercamiento práctico.
+
+### 2. Insertar mensajes en la cola
+
+Para agregar un nuevo mensaje, simplemente ejecuta:
+
+```sql
+INSERT INTO queue (id, data)
+VALUES ($id_str, $data_str)
+```
+
+Aquí, `$id_str` es el identificador único del mensaje y `$data_str` el contenido serializado.
+
+### 3. Reclamar y consultar mensajes
+
+El proceso de consumo consta de dos pasos: primero, reclamar un mensaje disponible; luego, obtenerlo para procesarlo.
+
+**Reclamar un mensaje:**
+
+```sql
+UPDATE queue
+SET
+    claimed_by = $claimed_by,
+    claimed_at = CURRENT_TIMESTAMP
+WHERE
+    claimed_at IS NULL
+    OR claimed_at < datetime('now', '-30 second')
+```
+
+Esto marca el mensaje como "en proceso" por un consumidor específico, evitando que otros lo tomen al mismo tiempo.
+
+**Obtener el mensaje reclamado:**
+
+```sql
+SELECT * FROM queue
+WHERE claimed_by = $claimed_by
+LIMIT 1
+```
+
+Así, cada consumidor solo procesa los mensajes que ha reclamado.
+
+### 4. Eliminar mensajes procesados
+
+Una vez procesado el mensaje, elimínalo para mantener la base de datos limpia:
+
+```sql
+DELETE FROM queue
+WHERE id = $id_str
+```
+
+Esto asegura que solo permanezcan en la cola los mensajes pendientes.
+
+### 5. Ejemplo completo: Clase QueueOnSQLite
+
+Para ver todo esto en acción, revisa la clase `QueueOnSQLite` (incluida más abajo). Esta clase encapsula la lógica de inserción, reclamación, consulta y eliminación de mensajes, mostrando cómo implementar un sistema de colas funcional y eficiente con SQLite y Bun.sh.
+
+<details>
+
+<summary>Clase QueueOnSQLite</summary>
+
+```ts
+import { Database } from "bun:sqlite";
+
+class Data {
+  id!: string;
+  data!: string;
+}
+
+export class QueueOnSQLite {
+  #started: boolean = false;
+  #db: Database;
+
+  constructor() {
+    this.#db = new Database(":memory:");
+  }
+
+  #ensureStarted() {
+    if (!this.#started) {
+      throw new Error("The database connector has not been started.");
+    }
+  }
+
+  async start() {
+    this.#db.exec(
+      `
+        CREATE TABLE IF NOT EXISTS queue (
+          id TEXT PRIMARY KEY,
+          created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+          claimed_at TIMESTAMP NULL,
+          claimed_by TEXT NULL,
+          data TEXT NOT NULL
+        );
+      `,
+    );
+    this.#started = true;
+    return this;
+  }
+
+  async insert<T = unknown>(id: string, data: T): Promise<void> {
+    this.#ensureStarted();
+
+    await this.#db
+      .query(
+        `
+        INSERT INTO queue (id, data)
+        VALUES ($id_str, $data_str)
+      `,
+      )
+      .run({
+        $id_str: id,
+        $data_str: JSON.stringify(data),
+      });
+  }
+
+  async nextRecord<T>(): Promise<T | null> {
+    this.#ensureStarted();
+
+    const claimed_by = crypto.randomUUID();
+
+    await this.#db
+      .query(
+        `
+      UPDATE queue
+      SET
+        claimed_by = $claimed_by,
+        claimed_at = CURRENT_TIMESTAMP
+      WHERE
+        claimed_at IS NULL
+        OR claimed_at < datetime('now', '-30 second')
+    `,
+      )
+      .run({
+        $claimed_by: claimed_by,
+      });
+
+    const data = this.#db
+      .query(
+        `
+        SELECT * FROM queue
+        WHERE claimed_by = $claimed_by
+        LIMIT 1
+      `,
+      )
+      .as(Data)
+      .get({ $claimed_by: claimed_by });
+
+    return data ? JSON.parse(data.data) : null;
+  }
+
+  async delete(id: string): Promise<void> {
+    this.#ensureStarted();
+
+    await this.#db
+      .query(
+        `
+        DELETE FROM queue
+        WHERE id = $id_str
+      `,
+      )
+      .run({
+        $id_str: id,
+      });
+  }
+}
+```
+
+</details>
+
+## Conclusión y agradecimientos
+
+Espero que este artículo te haya ayudado a comprender cómo funcionan los sistemas de colas y cómo puedes implementar uno propio desde cero. Si tienes alguna pregunta, sugerencia o simplemente quieres compartir tu experiencia, no dudes en dejar un comentario [aquí](https://github.com/JonDotsoy/jondotsoy/issues/new?title=article:custom-queue:+&labels=question).
+
+¡Gracias por leer y espero que esta información te sea útil en tus proyectos! Si te gustó este artículo, considera compartirlo con otros desarrolladores que puedan beneficiarse de este conocimiento.
