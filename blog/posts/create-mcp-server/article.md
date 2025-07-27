@@ -8,7 +8,7 @@ tags:
   - LLM
 author: "@jondotsoy"
 lang: es-CL
-date: 2025-01-27
+date: 2025-07-27
 summary: "Aprende a crear tu propio servidor MCP (Model Context Protocol) usando TypeScript SDK para conectar aplicaciones de IA con datos y funcionalidades externas de forma estandarizada y segura."
 ---
 
