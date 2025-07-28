@@ -27,11 +27,11 @@ El testing funcional automatizado ha evolucionado significativamente con la lleg
 
 Tradicionalmente, el testing se ha dejado para el final del desarrollo, perdiendo una valiosa oportunidad de optimizar nuestro trabajo como programadores. Además, la comunicación entre equipos de negocio y técnicos suele ser compleja, generando malentendidos que se traducen en productos que no cumplen exactamente con las expectativas del usuario final.
 
-Es aquí donde entra en juego **BDD (Behavior Driven Development)** y **Gherkin**, que nos permiten crear un puente de comunicación eficaz entre todos los stakeholders del proyecto.
+Es aquí donde entra en juego **BDD (Behavior Driven Development)** y **[Gherkin](https://www.accelq.com/blog/gherkin-syntax/)**, que nos permiten crear un puente de comunicación eficaz entre todos los stakeholders del proyecto.
 
 ## ¿Qué es Gherkin y por qué es importante?
 
-Gherkin es un **Lenguaje Específico de Dominio (DSL)** diseñado para resolver el problema de comunicación entre perfiles de negocio y técnicos. Su principal ventaja es que utiliza **lenguaje natural** que cualquier persona puede entender, independientemente de sus conocimientos técnicos.
+[Gherkin](https://www.accelq.com/blog/gherkin-syntax/) es un **Lenguaje Específico de Dominio (DSL)** diseñado para resolver el problema de comunicación entre perfiles de negocio y técnicos. Su principal ventaja es que utiliza **lenguaje natural** que cualquier persona puede entender, independientemente de sus conocimientos técnicos.
 
 ### Sintaxis fundamental de Gherkin
 
@@ -133,14 +133,14 @@ npm run dev
 
 ## ¿Qué es el Model Context Protocol (MCP) y por qué es revolucionario?
 
-El **Model Context Protocol (MCP)** es un estándar abierto desarrollado por Anthropic que representa un cambio de paradigma en cómo las aplicaciones de IA interactúan con herramientas externas. En el contexto de VS Code y testing funcional, MCP permite que GitHub Copilot tenga acceso directo y controlado a herramientas como Playwright.
+El **[Model Context Protocol (MCP)](https://code.visualstudio.com/blogs/2025/06/12/full-mcp-spec-support)** es un estándar abierto desarrollado por Anthropic que representa un cambio de paradigma en cómo las aplicaciones de IA interactúan con herramientas externas. En el contexto de VS Code y testing funcional, [MCP](https://code.visualstudio.com/blogs/2025/06/12/full-mcp-spec-support) permite que GitHub Copilot tenga acceso directo y controlado a herramientas como Playwright.
 
 ### Características fundamentales de MCP:
 
 - **Estándar abierto**: Desarrollado por Anthropic como protocolo universal
 - **Integración segura**: Control granular sobre el acceso a herramientas y datos
 - **Arquitectura modular**: Permite conectar múltiples herramientas simultáneamente
-- **Soporte nativo**: Disponible en VS Code desde la versión 1.102+
+- **Soporte nativo**: Disponible en [VS Code desde la versión 1.102](https://code.visualstudio.com/blogs/2025/06/12/full-mcp-spec-support)
 - **Tiempo real**: Ejecución directa de comandos sin salir del IDE
 
 ### ¿Cómo funciona MCP con Playwright?
@@ -173,7 +173,7 @@ Crear el archivo `.vscode/mcp.json` en la raíz del proyecto:
 
 #### Paso 2: Verificar configuración en VS Code
 
-1. Abrir VS Code (versión 1.102+)
+1. Abrir [VS Code (versión 1.102+)](https://code.visualstudio.com/blogs/2025/06/12/full-mcp-spec-support)
 2. Ir a la vista de extensiones (Ctrl+Shift+X)
 3. Verificar que aparece "MCP Servers" en la sección de extensiones instaladas
 4. Confirmar que Playwright aparece como servidor disponible
@@ -315,13 +315,13 @@ Al implementar este flujo de trabajo con MCP y GitHub Copilot, es importante ent
 
 ### Planes Disponibles de GitHub Copilot
 
-#### Plan Individual ($10 USD/mes)
+#### Plan Individual ([$10 USD/mes](https://docs.github.com/en/copilot/get-started/plans))
 
 - **Incluye**: Autocompletado de código básico
 - **Limitaciones**: Sin acceso a premium requests (comandos avanzados con MCP)
 - **Ideal para**: Desarrolladores individuales con uso básico
 
-#### Plan Pro ($10 USD/mes)
+#### Plan Pro ([$10 USD/mes](https://docs.github.com/en/copilot/get-started/plans))
 
 - **Incluye**: 1,500 premium requests mensuales
 - **Características adicionales**:
@@ -331,7 +331,7 @@ Al implementar este flujo de trabajo con MCP y GitHub Copilot, es importante ent
   - GPT-4 y Claude 3.5 Sonnet
 - **Ideal para**: Desarrolladores que usan testing automatizado y MCP
 
-#### Plan Pro+ ($39 USD/mes)
+#### Plan Pro+ ([$39 USD/mes](https://docs.github.com/en/copilot/get-started/plans))
 
 - **Incluye**: Todo del Plan Pro + requests ilimitados
 - **Sin límites**: Uso intensivo de premium requests
@@ -339,7 +339,7 @@ Al implementar este flujo de trabajo con MCP y GitHub Copilot, es importante ent
 
 ### ¿Qué son los Premium Requests?
 
-Los **premium requests** son llamadas especiales que:
+Los **[premium requests](https://techcrunch.com/2025/04/04/github-copilot-introduces-new-limits-charges-for-premium-ai-models/)** son llamadas especiales que:
 
 - Utilizan modelos de IA más avanzados (GPT-4, Claude 3.5 Sonnet)
 - Permiten el uso de MCP servers y herramientas externas
@@ -350,7 +350,7 @@ Los **premium requests** son llamadas especiales que:
 
 Si excedes tu límite mensual:
 
-- **Costo por request adicional**: $0.04 USD
+- **Costo por request adicional**: [$0.04 USD](https://docs.github.com/en/copilot/get-started/plans)
 - **Ejemplo**: 100 requests adicionales = $4 USD extras
 
 ### Estimación de Uso para Testing Funcional
@@ -412,7 +412,7 @@ El costo de Copilot se compensa rápidamente considerando:
 
 **Ejemplo de ROI**:
 
-- Costo anual Copilot Pro: $120 USD
+- Costo anual Copilot Pro: [$120 USD](https://docs.github.com/en/copilot/get-started/plans)
 - Tiempo ahorrado: ~20 horas/mes × $50 USD/hora = $1,000 USD/mes
 - ROI: ~833% anual
 
@@ -458,7 +458,7 @@ La combinación de VS Code, GitHub Copilot, el Model Context Protocol (MCP) y Pl
 
 ### Consideraciones estratégicas:
 
-El análisis de costos demuestra que la inversión en GitHub Copilot Pro ($10/mes) o Pro+ ($39/mes) se justifica rápidamente. Con un ROI superior al 800% anual para la mayoría de equipos, el costo se convierte en una inversión en productividad y calidad.
+El análisis de costos demuestra que la inversión en [GitHub Copilot Pro ($10/mes)](https://docs.github.com/en/copilot/get-started/plans) o [Pro+ ($39/mes)](https://docs.github.com/en/copilot/get-started/plans) se justifica rápidamente. Con un ROI superior al 800% anual para la mayoría de equipos, el costo se convierte en una inversión en productividad y calidad.
 
 ### El futuro del testing:
 
