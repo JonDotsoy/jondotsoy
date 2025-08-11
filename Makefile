@@ -10,4 +10,4 @@ dependency-bun:
 
 .PHONY: fmt
 fmt: dependency-bun
-	bun x prettier -w .
+	bun x prettier -w README.md blog/draft
