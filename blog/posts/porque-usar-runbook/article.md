@@ -12,6 +12,8 @@ date: 2026-02-01
 publications:
   - url: https://www.linkedin.com/pulse/por-qu%C3%A9-usar-runbooks-automatiza-la-documentaci%C3%B3n-de-jonathan-ufnbf
     date: 2026-02-01
+  - url: https://www.kodingvibes.com/post/a2db1681-ba78-4fd6-bf19-32c05a8109b0
+    date: 2026-02-02
 ---
 
 # Por qué usar Runbooks: Automatiza la documentación de escenarios reproducibles con IA
