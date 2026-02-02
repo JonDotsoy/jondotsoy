@@ -45,3 +45,7 @@ Some experimental projects.
 - [Chelas.js](https://www.chelajs.cl/) Comunidad de Javascript de Chile. We have successfully organized 2 meetups this year. Our first meetup was on January 11th at Cerveceria Berbazul Barrio Italia ([https://lu.ma/oz60roog](https://lu.ma/oz60roog)) and our second meetup was on February 22nd at Cerveceria HbH ([https://lu.ma/p3dvyve7](https://lu.ma/p3dvyve7)) with great success. We are planning our next meetup for March, dates to be confirmed. Check out all our events at [https://lu.ma/chelas.js](https://lu.ma/chelas.js).
 - [Javascript Chile](https://jschile.org/) Javascript Community from Chile.
 - [Tribu Latam](https://www.tribulatam.com/) Latam Community, Infrastructure and AI Fire Pit. I actively participate in the Infrastructure Fire Pit.  I invite you to participate in one of the fire pits here [https://www.tribulatam.com/fogones](https://www.tribulatam.com/fogones).
+
+## 📝 Articles
+
+- [Por qué usar Runbooks: Automatiza la documentación de escenarios reproducibles con IA](https://www.linkedin.com/pulse/por-qu%C3%A9-usar-runbooks-automatiza-la-documentaci%C3%B3n-de-jonathan-ufnbf) (es) - Aprenderás a crear runbooks y generar evidencia de su ejecución con ayuda de IA para documentar y validar escenarios reproducibles en tus proyectos. Published on 2026-02-01 by [@jondotsoy](https://github.com/jondotsoy).
