@@ -14,6 +14,8 @@ publications:
     date: 2026-02-01
   - url: https://www.kodingvibes.com/post/a2db1681-ba78-4fd6-bf19-32c05a8109b0
     date: 2026-02-02
+  - url: https://jon.soy/blog/2026-02-01-por-que-usar-runbook/
+    date: 2026-02-02
 ---
 
 # Por qué usar Runbooks: Automatiza la documentación de escenarios reproducibles con IA
