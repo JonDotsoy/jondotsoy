@@ -17,7 +17,7 @@ Here are some ideas to get you started:
 
 ## 🔭 Currently working on
 
-- ⭐ [actioman](https://github.com/JonDotsoy/actioman) Share functions with other JS clients. Call backend functions with type-safety.  `actioman` is in beta version `0.7.0` and we are integrating improvements 🛠️ in telemetry and configuration system.
+
 - [your-life-in-weeks](https://github.com/JonDotsoy/your-life-in-weeks?tab=readme-ov-file) This project is inspired by the article "Your Life in Weeks" published on Wait But Why, where Tim Urban illustrates the structure of a person's life from conception to old age.
 - [streamable-tools](https://github.com/JonDotsoy/streamable-tools) `streamable-tools` is a JS/TS library for easy stream manipulation in web apps, offering utilities like `MultiplyStream` for data propagation, `SplitStream` for data splitting, and tools for stream creation and control. Install with `npm add streamable-tools`
 - [ICalendar.JS](https://github.com/JonDotsoy/icalendar.js) standard library to parser ICalendar based on [RFC5545](https://www.rfc-editor.org/rfc/rfc5545.txt)
