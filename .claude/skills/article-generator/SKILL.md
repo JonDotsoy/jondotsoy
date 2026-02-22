@@ -62,6 +62,55 @@ publications:
   - **url**: URL donde fue publicado
   - **date**: Fecha de publicación
 
+## Formato del Contenido Markdown
+
+El contenido del artículo debe seguir estas reglas de formato:
+
+### Separadores de página
+
+- **NO usar `---` como separador de página** en el contenido del artículo
+- Los únicos `---` permitidos son los que delimitan el bloque de metadata YAML al inicio del archivo
+- Las secciones se separan simplemente con espacio en blanco (línea vacía) entre ellas
+
+### Tablas vs. Bullet Points
+
+- **Preferir bullet points sobre tablas** para presentar información estructurada
+- Las tablas solo deben usarse cuando la información es genuinamente tabular y requiere columnas relacionadas
+- Para comparaciones, especificaciones o listas de características, usar bullet points con formato anidado
+
+**Ejemplo correcto (bullet points):**
+
+```markdown
+**Plataformas soportadas:**
+
+- **Claude**
+  - URL base: `https://claude.ai/new`
+  - Parámetro: `?q=`
+  - Comportamiento: Precarga el prompt en la caja de texto
+
+- **ChatGPT**
+  - URL base: `https://chat.openai.com/?q=`
+  - Parámetro: `?q=`
+  - Comportamiento: Precarga el prompt y puede auto-enviar
+```
+
+**Ejemplo a evitar (tabla):**
+
+```markdown
+| Plataforma | URL base | Parámetro |
+|------------|----------|-----------|
+| Claude     | ...      | ?q=       |
+```
+
+### Otros elementos de formato
+
+- Usar títulos jerárquicos apropiados (`##`, `###`, `####`)
+- Usar bloques de código con syntax highlighting cuando sea relevante
+- Usar **negritas** para enfatizar términos importantes
+- Usar *cursivas* para referencias o expresiones
+- Usar listas ordenadas solo cuando el orden sea relevante
+- Usar citas (`>`) para destacar definiciones o conceptos clave
+
 ## Instrucciones de Ejecución
 
 Cuando el usuario solicite generar un artículo:
@@ -119,3 +168,5 @@ El skill:
 - El contenido debe ser original y bien redactado, no una simple copia de las notas
 - Respeta la estructura definida en `content-structure.md` si existe
 - El artículo debe ser autocontenido y comprensible sin necesidad de leer las notas originales
+- **NO usar `---` como separadores de página** en el contenido (solo en el frontmatter YAML)
+- **Preferir bullet points en lugar de tablas** para presentar información estructurada
