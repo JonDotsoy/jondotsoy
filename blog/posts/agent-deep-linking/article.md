@@ -12,6 +12,8 @@ date: 2026-02-22
 publications:
   - url: https://www.linkedin.com/pulse/agent-deep-linking-integra-ia-sin-api-ni-backend-delgado-zamorano-mmlhf
     date: 2026-02-22
+  - url: https://jon.soy/blog/2026-02-22-agent-deep-linking-integra-ia-sin-api-ni-backend/
+    date: 2026-02-22
 ---
 
 # Agent Deep Linking — Integra IA sin API ni backend
