@@ -24,6 +24,7 @@ Casi cualquier página no trivial de una app necesita combinar varias fuentes de
 
 - Cada "pieza" de estado (sesión, artículos recientes, health del server, etc.) se modela como una tupla `[loading, error, data]`.
 - El estado de una página completa es un objeto que agrupa todas esas piezas, expuesto como un `atom` de nanostores.
+- Un helper `t(promise)` envuelve cualquier promesa en `[ok, error, data]`, evitando `try/catch` repetido al resolver cada recurso.
 - El fetch de cada pieza se dispara dentro de `onMount`, así solo se pide la información cuando alguien realmente está escuchando el store.
 - El mismo store se puede modelar de forma monolítica (un solo atom con un solo `onMount`) o atomizada (un atom por recurso, compuestos con `computed`).
 - El consumo es igual de simple en React (`useStore`) que en JS vanilla (`subscribe` / `listen`).
@@ -60,6 +61,42 @@ type HomeState = {
 
 > La ventaja de usar siempre la misma forma `[loading, error, data]` es que cualquier componente que consuma una pieza de estado sabe exactamente cómo leerla, sin importar de qué recurso se trate.
 
+## El helper `t`: adiós al try/catch
+
+Cada vez que resolvemos un recurso terminamos escribiendo el mismo `try/catch` para convertir una promesa en éxito o error. `t` (por *try*) resume ese bloque en una sola línea, envolviendo cualquier promesa en una tupla `[ok, error, data]`:
+
+```ts
+const t = async <T>(
+  promise: Promise<T>,
+): Promise<[ok: boolean, error: Error | null, data: T | null]> => {
+  try {
+    const data = await promise
+    return [true, null, data]
+  } catch (error) {
+    return [false, error as Error, null]
+  }
+}
+```
+
+No es exclusivo de `my-state`, funciona con cualquier promesa:
+
+```ts
+const [ok, error, data] = await t(fetch('/api/session').then((r) => r.json()))
+
+if (!ok) {
+  console.error(error)
+} else {
+  console.log(data)
+}
+```
+
+Lo interesante para este patrón es que la forma de `t` —`[ok, error, data]`— comparte el mismo orden `error, data` que la tupla `Resource<T>`. Eso hace que resolver un recurso quede en una línea, sin `try/catch` y sin anidar callbacks:
+
+```ts
+const [, error, data] = await t(fetch('/api/session').then((r) => r.json()))
+$home.set({ ...$home.get(), session: [false, error, data] })
+```
+
 ## Implementación monolítica: un atom, un `onMount`
 
 La forma más directa de implementar `my-state` es con un solo `atom` de nanostores que contiene todo el estado de la página, y un `onMount` que dispara todos los fetch necesarios:
@@ -79,30 +116,18 @@ onMount($home, () => {
   fetchServerHealth()
 
   async function fetchSession() {
-    try {
-      const data = await fetch('/api/session').then((r) => r.json())
-      $home.set({ ...$home.get(), session: [false, null, data] })
-    } catch (error) {
-      $home.set({ ...$home.get(), session: [false, error as Error, null] })
-    }
+    const [, error, data] = await t(fetch('/api/session').then((r) => r.json()))
+    $home.set({ ...$home.get(), session: [false, error, data] })
   }
 
   async function fetchRecentArticles() {
-    try {
-      const data = await fetch('/api/articles/recent').then((r) => r.json())
-      $home.set({ ...$home.get(), recentArticles: [false, null, data] })
-    } catch (error) {
-      $home.set({ ...$home.get(), recentArticles: [false, error as Error, null] })
-    }
+    const [, error, data] = await t(fetch('/api/articles/recent').then((r) => r.json()))
+    $home.set({ ...$home.get(), recentArticles: [false, error, data] })
   }
 
   async function fetchServerHealth() {
-    try {
-      const data = await fetch('/api/health').then((r) => r.json())
-      $home.set({ ...$home.get(), serverHealth: [false, null, data] })
-    } catch (error) {
-      $home.set({ ...$home.get(), serverHealth: [false, error as Error, null] })
-    }
+    const [, error, data] = await t(fetch('/api/health').then((r) => r.json()))
+    $home.set({ ...$home.get(), serverHealth: [false, error, data] })
   }
 })
 ```
@@ -125,9 +150,9 @@ function createResource<T>(fetcher: () => Promise<T>) {
   const $resource = atom<Resource<T>>([true, null, null])
 
   onMount($resource, () => {
-    fetcher()
-      .then((data) => $resource.set([false, null, data]))
-      .catch((error) => $resource.set([false, error as Error, null]))
+    t(fetcher()).then(([, error, data]) => {
+      $resource.set([false, error, data])
+    })
   })
 
   return $resource
@@ -208,6 +233,7 @@ La diferencia es clave: si necesitas pintar el estado inicial (aunque sea el est
 - **Tipa la tupla de estado** para no depender de acceder por índice sin contexto; desestructurar con nombres (`const [loading, error, data] = session`) ayuda a la legibilidad.
 - **Considera cancelar fetch en curso** si el store se desmonta antes de que la petición termine, especialmente en páginas donde el usuario navega rápido.
 - **Comparte recursos entre páginas** con la variante atomizada cuando detectes que dos o más páginas piden lo mismo (como `session`).
+- **Usa `t` para resolver promesas**, no solo dentro de `onMount`: reduce el ruido de `try/catch` en cualquier punto de la app donde necesites capturar éxito/error de una promesa.
 
 ## ¿Por qué nanostores y no Redux, Zustand o Context?
 

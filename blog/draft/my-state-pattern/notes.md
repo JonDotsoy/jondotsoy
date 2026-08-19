@@ -33,6 +33,28 @@ type HomeState = {
 }
 ```
 
+## Helper `t`: evitar try/catch
+
+Utilidad genérica para resolver cualquier promesa sin escribir `try/catch`:
+convierte éxito/error en una tupla `[ok, error, data]`.
+
+```ts
+const t = async <T>(
+  promise: Promise<T>,
+): Promise<[ok: boolean, error: Error | null, data: T | null]> => {
+  try {
+    const data = await promise
+    return [true, null, data]
+  } catch (error) {
+    return [false, error as Error, null]
+  }
+}
+```
+
+El orden `error, data` de `t` calza directo con las posiciones 2 y 3 de la
+tupla `Resource<T> = [loading, error, data]`, así que resolver un recurso
+queda en una línea: `const [, error, data] = await t(promise)`.
+
 ## Store con nanostores
 
 ```ts
@@ -50,30 +72,18 @@ onMount($home, () => {
   fetchServerHealth()
 
   async function fetchSession() {
-    try {
-      const data = await fetch('/api/session').then(r => r.json())
-      $home.set({ ...$home.get(), session: [false, null, data] })
-    } catch (error) {
-      $home.set({ ...$home.get(), session: [false, error as Error, null] })
-    }
+    const [, error, data] = await t(fetch('/api/session').then(r => r.json()))
+    $home.set({ ...$home.get(), session: [false, error, data] })
   }
 
   async function fetchRecentArticles() {
-    try {
-      const data = await fetch('/api/articles/recent').then(r => r.json())
-      $home.set({ ...$home.get(), recentArticles: [false, null, data] })
-    } catch (error) {
-      $home.set({ ...$home.get(), recentArticles: [false, error as Error, null] })
-    }
+    const [, error, data] = await t(fetch('/api/articles/recent').then(r => r.json()))
+    $home.set({ ...$home.get(), recentArticles: [false, error, data] })
   }
 
   async function fetchServerHealth() {
-    try {
-      const data = await fetch('/api/health').then(r => r.json())
-      $home.set({ ...$home.get(), serverHealth: [false, null, data] })
-    } catch (error) {
-      $home.set({ ...$home.get(), serverHealth: [false, error as Error, null] })
-    }
+    const [, error, data] = await t(fetch('/api/health').then(r => r.json()))
+    $home.set({ ...$home.get(), serverHealth: [false, error, data] })
   }
 })
 ```
@@ -97,9 +107,9 @@ function createResource<T>(fetcher: () => Promise<T>) {
   )
 
   onMount($resource, () => {
-    fetcher()
-      .then(data => $resource.set([false, null, data]))
-      .catch(error => $resource.set([false, error as Error, null]))
+    t(fetcher()).then(([, error, data]) => {
+      $resource.set([false, error, data])
+    })
   })
 
   return $resource
@@ -173,23 +183,27 @@ $home.listen((state) => {
 1. Qué problema resuelve este patrón (estado disperso, falta de loading/error
    consistente, fetch duplicado, fetch de datos que nadie usa).
 2. Anatomía del tipo de estado: tupla `[loading, error, data]` por pieza.
-3. Implementación "monolítica": un solo atom + un solo onMount con varios
-   fetch adentro.
-4. Implementación "atomizada": un atom por recurso + `computed` para componer,
-   reutilización entre páginas.
-5. Uso en React vía `useStore` (hook `useHome`).
-6. Uso en vanilla JS vía `subscribe` vs `listen` (diferencia clave: subscribe
+3. Helper `t(promise)`: evita try/catch, devuelve `[ok, error, data]`, y su
+   orden calza con `Resource<T>` para resolver un recurso en una línea.
+4. Implementación "monolítica": un solo atom + un solo onMount con varios
+   fetch adentro, usando `t` en vez de try/catch.
+5. Implementación "atomizada": un atom por recurso + `computed` para componer,
+   reutilización entre páginas, también usando `t` dentro de `createResource`.
+6. Uso en React vía `useStore` (hook `useHome`).
+7. Uso en vanilla JS vía `subscribe` vs `listen` (diferencia clave: subscribe
    dispara inmediatamente con el valor actual, listen no).
-7. Buenas prácticas:
+8. Buenas prácticas:
    - Nombrar los stores por página/feature: `$home`, `$profile`, `$checkout`.
    - No mutar el objeto de estado, siempre `set` con un objeto nuevo.
    - Considerar abortar fetch en curso si el componente se desmonta muy rápido.
    - Tipar bien la tupla de estado para evitar accesos incorrectos por índice.
-8. Comparación breve con alternativas (Redux, Zustand, Context+useReducer) y
+   - Usar `t` en cualquier punto de la app donde se resuelva una promesa, no
+     solo dentro de `onMount`.
+9. Comparación breve con alternativas (Redux, Zustand, Context+useReducer) y
    por qué nanostores encaja bien para este patrón (stores atómicos, tree
    shakeable, framework-agnostic).
-9. Demo interactiva embebida (o enlace) que muestre el patrón funcionando:
-   loading -> data/error, y cómo cambia el estado de la página en vivo.
+10. Demo interactiva embebida (o enlace) que muestre el patrón funcionando:
+    loading -> data/error, y cómo cambia el estado de la página en vivo.
 
 ## Tono
 
