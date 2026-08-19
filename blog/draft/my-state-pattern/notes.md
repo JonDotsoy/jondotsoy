@@ -11,7 +11,7 @@ en vez de tener múltiples stores sueltos sin relación explícita entre sí.
 Cada pieza del estado se modela como una tupla/tag de estado tipo:
 
 ```ts
-type Piece<T> = [loading: boolean, error: Error | null, data: T | null]
+type Piece<T> = [loading: boolean, error: unknown, data: T | null]
 ```
 
 Y el estado completo de la página es un objeto con una pieza por cada
@@ -27,9 +27,9 @@ Una página `home` que necesita:
 
 ```ts
 type HomeState = {
-  session: [loading: boolean, error: Error | null, data: SessionData | null]
-  recentArticles: [loading: boolean, error: Error | null, data: Article[] | null]
-  serverHealth: [loading: boolean, error: Error | null, data: HealthData | null]
+  session: [loading: boolean, error: unknown, data: SessionData | null]
+  recentArticles: [loading: boolean, error: unknown, data: Article[] | null]
+  serverHealth: [loading: boolean, error: unknown, data: HealthData | null]
 }
 ```
 
@@ -41,13 +41,25 @@ convierte éxito/error en una tupla `[ok, error, data]`.
 ```ts
 const t = async <T>(
   promise: Promise<T>,
-): Promise<[ok: boolean, error: Error | null, data: T | null]> => {
+): Promise<[ok: true, error: null, data: T] | [ok: false, error: unknown, data: null]> => {
   try {
     const data = await promise
     return [true, null, data]
   } catch (error) {
-    return [false, error as Error, null]
+    return [false, error, null]
   }
+}
+```
+
+El retorno es una unión discriminada por `ok`, no una tupla plana. Eso permite
+que TypeScript acote (*narrow*) `data` según `ok`:
+
+```ts
+const [ok, err, data] = await t(promise)
+if (ok) {
+  // data: T, err: null
+} else {
+  // data: null, err: unknown
 }
 ```
 
@@ -102,7 +114,7 @@ store derivado por página, enganchando el `onMount` de cada pieza por separado.
 import { atom, onMount, computed } from 'nanostores'
 
 function createResource<T>(fetcher: () => Promise<T>) {
-  const $resource = atom<[loading: boolean, error: Error | null, data: T | null]>(
+  const $resource = atom<[loading: boolean, error: unknown, data: T | null]>(
     [true, null, null]
   )
 

@@ -46,7 +46,7 @@ Sin un patrón claro, es común terminar con tres piezas de estado gestionadas d
 Cada recurso que la página consume se representa con el mismo tipo:
 
 ```ts
-type Resource<T> = [loading: boolean, error: Error | null, data: T | null]
+type Resource<T> = [loading: boolean, error: unknown, data: T | null]
 ```
 
 Y el estado completo de la página es un objeto que agrupa una tupla por cada sección de información que necesita:
@@ -68,27 +68,31 @@ Cada vez que resolvemos un recurso terminamos escribiendo el mismo `try/catch` p
 ```ts
 const t = async <T>(
   promise: Promise<T>,
-): Promise<[ok: boolean, error: Error | null, data: T | null]> => {
+): Promise<[ok: true, error: null, data: T] | [ok: false, error: unknown, data: null]> => {
   try {
     const data = await promise
     return [true, null, data]
   } catch (error) {
-    return [false, error as Error, null]
+    return [false, error, null]
   }
 }
 ```
 
-No es exclusivo de `my-state`, funciona con cualquier promesa:
+El tipo de retorno no es una simple tupla `[boolean, Error | null, T | null]`, es una **unión discriminada por `ok`**. Eso importa porque TypeScript puede usar el valor de `ok` para acotar (*narrow*) el tipo de `data` en cada rama, sin necesidad de `as` ni de comprobar `data !== null` por separado:
 
 ```ts
-const [ok, error, data] = await t(fetch('/api/session').then((r) => r.json()))
+const [ok, err, data] = await t(fetch('/api/session').then((r) => r.json()))
 
-if (!ok) {
-  console.error(error)
-} else {
+if (ok) {
+  // data: SessionData — err: null
   console.log(data)
+} else {
+  // data: null — err: unknown
+  console.error(err)
 }
 ```
+
+`error` se tipa como `unknown` (no `Error`) porque eso es exactamente lo que `catch` entrega en TypeScript: no hay garantía de que lo que se lanzó sea una instancia de `Error`. `t` no oculta esa realidad, solo evita que tengas que repetir el `try/catch` para llegar a ella.
 
 Lo interesante para este patrón es que la forma de `t` —`[ok, error, data]`— comparte el mismo orden `error, data` que la tupla `Resource<T>`. Eso hace que resolver un recurso quede en una línea, sin `try/catch` y sin anidar callbacks:
 
