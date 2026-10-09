@@ -21,7 +21,7 @@ Un *worktree* es un directorio de trabajo adicional asociado al mismo repositori
 - **Duplicación de dependencias.** Cada worktree es un árbol de trabajo independiente, y también lo es su `node_modules` (o el equivalente de tu ecosistema). El espacio en disco y el tiempo de instalación se multiplican por el número de worktrees.
 - **Secretos copiados a mano.** Los archivos `.env` no se versionan, así que un worktree nuevo nace sin ellos. La salida habitual es copiar y pegar desde otro worktree, con el riesgo de olvidar una variable, arrastrar un valor desactualizado o dejar un secreto donde no corresponde.
 
-Los dos primeros son problemas de organización y almacenamiento, y se resuelven con hábitos y otras herramientas. El tercero tiene una solución directa, y es el que aborda este artículo.
+Los dos primeros son problemas de organización y almacenamiento, y se resuelven con hábitos y otras herramientas. El tercero tiene una solución directa, y [se aborda aquí](#la-herramienta-jondotsoyenvs).
 
 ## La herramienta: `@jondotsoy/envs`
 
