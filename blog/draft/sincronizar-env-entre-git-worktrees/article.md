@@ -1,6 +1,6 @@
 ---
 title: Un solo archivo para los .env de todos tus git worktrees
-description: Cada vez que creas un worktree copias secretos a mano. Presento @jondotsoy/envs, una CLI que centraliza los .env de todos los worktrees en un único YAML, junto con una guía para incorporarla al flujo diario sin comprometer la seguridad.
+description: Cada vez que creas un worktree copias secretos a mano. Presento @jondotsoy/envs, una CLI que centraliza los .env de todos los worktrees en un único YAML y se usa con un solo comando, sin instalar nada.
 lang: es
 author:
   name: Jonathan Delgado
@@ -33,7 +33,8 @@ Permite editar todos los valores en conjunto y distribuirlos a cada worktree, o 
 
 - **Bun** y **git** instalados. La herramienta usa APIs propias de Bun (por ejemplo, su parser de YAML integrado), por lo que no funciona con Node. El paquete no declara una versión mínima de Bun: usa una versión reciente.
 - Para `envs edit`, el ejecutable **`code`** (VS Code) debe estar en el `PATH`. El editor no es configurable por ahora, y sin `code` el comando falla con un error poco amigable.
-- **Versión del paquete.** La 0.1.4 es la que se describe aquí. Es un proyecto joven y su interfaz puede cambiar.
+- **Nada que instalar.** Se ejecuta con `bunx`, que descarga el paquete la primera vez. La instalación global es opcional y solo acorta el comando.
+- **Versión del paquete.** Este artículo describe la 0.1.5. Es un proyecto joven y su interfaz puede cambiar.
 
 ### Cómo funciona
 
@@ -46,10 +47,10 @@ La herramienta se ejecuta desde cualquier worktree del repositorio. Internamente
 
 ### Comandos
 
-- **`envs init`:** crea `.envs/`, un `.gitignore` interno con `*` (para que su contenido nunca se versione) y un `values.yml` vacío.
-- **`envs pull`:** lee el `.env` de cada worktree y consolida los valores en `values.yml`.
-- **`envs push`:** escribe en el `.env` de cada worktree los valores definidos en `values.yml`. Actualiza las variables existentes en su lugar, agrega las nuevas al final y conserva comentarios y variables ajenas.
-- **`envs edit`:** ejecuta `pull`, abre `values.yml` en VS Code, espera a que lo cierres y ejecuta `push`. Si el editor termina con error, no se distribuye nada (aunque el `pull` previo ya habrá reescrito el YAML).
+- **`envs init`:** (opcional; `edit` lo ejecuta por ti) crea `.envs/`, un `.gitignore` interno con `*` (para que su contenido nunca se versione) y un `values.yml` vacío.
+- **`envs pull`:** (requiere `values.yml`) lee el `.env` de cada worktree y consolida los valores en `values.yml`.
+- **`envs push`:** (requiere `values.yml`) escribe en el `.env` de cada worktree los valores definidos en `values.yml`. Actualiza las variables existentes en su lugar, agrega las nuevas al final y conserva comentarios y variables ajenas.
+- **`envs edit`:** es el comando principal. Si `values.yml` no existe, ejecuta `init`; luego ejecuta `pull`, abre `values.yml` en VS Code, espera a que lo cierres y ejecuta `push`. Si el editor termina con error, no se distribuye nada (aunque el `pull` previo ya habrá reescrito el YAML).
 - **`envs lint`:** revisa problemas de seguridad (permisos del archivo, secretos versionados, valores débiles, URLs con credenciales) y termina con código de salida 1 si encuentra advertencias.
 
 ### El formato de `values.yml`
@@ -81,38 +82,41 @@ Esta organización responde a una necesidad concreta: ver de un vistazo en qué 
 
 ## Guía de adopción rápida
 
-Sigue los pasos en orden; el conjunto toma pocos minutos. Está pensada para un repositorio con al menos dos worktrees.
+No hay nada que instalar ni configurar. Está pensada para un repositorio con al menos dos worktrees; el conjunto toma pocos minutos.
 
 ### 1. Verificar los requisitos
 
 ```bash
 bun --version
 git --version
-code --version   # solo necesario para `envs edit`
+code --version
 ```
 
-### 2. Probar sin instalar
+### 2. Ejecutar el comando principal
 
 Desde cualquier worktree del repositorio:
 
 ```bash
-bunx @jondotsoy/envs@0.1.4 help
+bunx @jondotsoy/envs edit
 ```
 
-Fijar la versión es una buena práctica: esta herramienta tendrá acceso a todos tus secretos, y `bunx` sin versión ejecuta siempre la última publicada. Si te convence, instálala de forma global (el resto de la guía usa el comando `envs`):
+La primera vez, `edit` hace todo el trabajo inicial:
+
+- Crea `.envs/values.yml` y `.envs/.gitignore` (con `*`, para que git ignore la carpeta).
+- Recoge el `.env` actual de cada worktree y los consolida en `values.yml`. Como `defaults` está vacío al inicio, las variables comunes aparecerán repetidas por rama; puedes moverlas a `defaults` y los siguientes `pull` no las duplicarán.
+- Abre `values.yml` en VS Code y queda esperando hasta que lo cierres.
+- Al cerrar el editor, escribe los valores en el `.env` de cada worktree.
+
+### 3. Proteger lo que se generó
+
+El archivo contiene secretos en texto plano y la herramienta no modifica permisos por sí misma:
 
 ```bash
-bun add -g @jondotsoy/envs@0.1.4
-```
-
-### 3. Inicializar y proteger
-
-```bash
-envs init
 chmod 600 .envs/values.yml
+bunx @jondotsoy/envs lint
 ```
 
-`init` crea `.envs/` con su propio `.gitignore`, pero no protege los `.env` de cada worktree. Agrega esta línea al `.gitignore` del proyecto:
+`init` solo protege `.envs/`, no los `.env` de cada worktree. Agrega esta línea al `.gitignore` del proyecto:
 
 ```gitignore
 .env
@@ -120,39 +124,17 @@ chmod 600 .envs/values.yml
 
 Si algún `.env` ya estaba versionado, ignorarlo no basta: sigue en el historial. Quítalo del índice con `git rm --cached .env`, y considera rotar los secretos que hayan quedado expuestos.
 
-### 4. Importar lo que ya tienes
+Usa `lint` como verificación local, por ejemplo en un hook de pre-commit. No sirve en CI: `.envs/` está ignorado, por lo que un clon limpio no tiene `values.yml` y el comando termina con error.
 
-```bash
-envs pull
-```
+### 4. Incorporarlo al flujo diario
 
-El comando recoge los `.env` existentes de todos los worktrees y los consolida en `values.yml`. Como `defaults` está vacío al inicio, las variables comunes aparecerán repetidas por rama. Puedes moverlas después a `defaults`; los siguientes `pull` no las duplicarán.
-
-### 5. Editar y distribuir
-
-```bash
-envs edit
-```
-
-Cambia los valores en el editor y cierra el archivo. El comando queda esperando hasta que lo cierres, y entonces distribuye los cambios al `.env` de cada worktree. Este es el comando del día a día.
-
-Edita siempre con `envs edit`. Si modificas `values.yml` a mano, ejecuta `envs push` inmediatamente después: un `pull` previo borraría las entradas que aún no estén en los `.env`.
-
-### 6. Verificar
-
-```bash
-envs lint
-```
-
-Úsalo como verificación local, por ejemplo en un hook de pre-commit. No sirve en CI: `.envs/` está ignorado, por lo que un clon limpio no tiene `values.yml` y el comando termina con error.
-
-### 7. Incorporarlo al flujo diario
+Desde ahora, `bunx @jondotsoy/envs edit` es el único comando que necesitas. Edítalo siempre con `edit`; si modificas `values.yml` a mano, ejecuta `push` inmediatamente después, porque un `pull` previo borraría las entradas que aún no estén en los `.env`.
 
 #### Al crear un worktree nuevo
 
 ```bash
 git worktree add ../mi-proyecto-feature-x -b feature-x
-envs edit
+bunx @jondotsoy/envs edit
 ```
 
 El worktree nuevo solo recibe lo definido en `defaults`; no hereda nada de otras ramas. Para cada variable propia, agrega una línea con el nombre exacto de la rama (`feature-x: valor`) bajo la variable correspondiente y cierra el editor.
@@ -163,7 +145,15 @@ Edítalo en `values.yml`: una sola vez si está en `defaults`, o en cada worktre
 
 #### Al eliminar un worktree
 
-Elimínalo primero con `git worktree remove` y después borra sus entradas del YAML con `envs edit`. `pull` no las elimina automáticamente, y si el worktree sigue existiendo, el siguiente `pull` las reimporta.
+Elimínalo primero con `git worktree remove` y después borra sus entradas del YAML con `edit`. `pull` no las elimina automáticamente, y si el worktree sigue existiendo, el siguiente `pull` las reimporta.
+
+#### Opcional: instalar el comando corto
+
+Si lo usas a diario, puedes instalarlo de forma global y reemplazar `bunx @jondotsoy/envs` por `envs`:
+
+```bash
+bun add -g @jondotsoy/envs
+```
 
 ## Consideraciones de seguridad
 
@@ -174,7 +164,7 @@ La herramienta resuelve una comodidad, no el problema de gestionar secretos. Ant
 - **Copias fuera de control.** El historial local de VS Code, los respaldos del sistema y los servicios de sincronización en la nube pueden conservar versiones anteriores de `values.yml`. Un valor rotado puede seguir existiendo en alguna de esas copias.
 - **Secretos que reaparecen.** `pull` importa lo que haya en los `.env`. Si rotas un secreto y algún worktree conserva el valor antiguo, un `pull` posterior lo reintroduce.
 - **Salida en consola.** `push` enmascara los valores de variables cuyo nombre sugiere un secreto (`TOKEN`, `PASSWORD`, `KEY`, entre otros), pero no el resto. Una `DATABASE_URL` con contraseña puede imprimirse en claro, así que evita compartir capturas o logs de la terminal.
-- **Cadena de suministro.** Fija la versión del paquete y revisa sus cambios antes de actualizar.
+- **Cadena de suministro.** `bunx @jondotsoy/envs` ejecuta siempre la última versión publicada, y esta herramienta tiene acceso a todos tus secretos. Si lo prefieres, fija la versión (`bunx @jondotsoy/envs@0.1.5 edit`) y revisa los cambios antes de actualizar.
 
 ## Limitaciones conocidas
 
@@ -189,12 +179,12 @@ La herramienta resuelve una comodidad, no el problema de gestionar secretos. Ant
 
 Los worktrees seguirán siendo parte de mi flujo diario, y la proliferación de ramas y la duplicación de dependencias requieren soluciones distintas. Pero copiar secretos a mano ya no tiene por qué existir. Un solo archivo y un solo comando reducen una tarea repetitiva y propensa a errores a unos segundos.
 
-Elige hoy un repositorio con al menos dos worktrees y sigue la guía: en menos de cinco minutos tendrás tus variables en un único lugar y una verificación de seguridad a un comando de distancia. Después, repite el proceso en el resto de tus proyectos:
+Elige hoy un repositorio con al menos dos worktrees y ejecuta, desde cualquiera de ellos:
 
 ```bash
-envs init && chmod 600 .envs/values.yml
-envs pull
-envs edit
+bunx @jondotsoy/envs edit
 ```
+
+Sin instalar nada, en menos de cinco minutos tendrás tus variables en un único lugar. Después, repite el proceso en el resto de tus proyectos y protege el resultado con los pasos 3 y 4 de la guía.
 
 Si encuentras errores o tienes ideas para mejorarla, repórtalas en el repositorio del proyecto: <https://github.com/JonDotsoy/envs>.
