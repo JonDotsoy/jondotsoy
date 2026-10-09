@@ -1,6 +1,7 @@
 ---
 title: Un solo archivo para los .env de todos tus git worktrees
 description: Cada vez que creas un worktree copias secretos a mano. Presento @jondotsoy/envs, una CLI que centraliza los .env de todos los worktrees en un único YAML y se usa con un solo comando, sin instalar nada.
+cover: ./assets/cover.svg
 lang: es
 author:
   name: Jonathan Delgado
