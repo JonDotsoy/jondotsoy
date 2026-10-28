@@ -8,15 +8,32 @@
 
 ## 🚀 Projects
 
+### 📦 Libraries & formats
+
 | Project | What it does |
 | --- | --- |
 | 🔥 [**hotconfigs**](https://github.com/JonDotsoy/configs#readme) | Reactive, typed configuration library for Node.js/TypeScript. Every field is a live store, so your app reacts to env vars, files and HTTP/SSE feeds without a redeploy. `npm i hotconfigs` |
-| ⭐ [**my-awesome**](https://github.com/JonDotsoy/my-awesome#readme) | A curated collection of useful tools and resources, organized by productivity, finance, communication, automation and learning. |
 | 📜 [**donly**](https://github.com/JonDotsoy/donly#readme) | DON (Directive Object Notation): a human-readable text format for exchanging directive objects between applications. |
-| 🌳 [**worktree**](https://github.com/JonDotsoy/worktree#readme) | VS Code extension to list, open and create the git worktrees of a repository without leaving the editor. |
+
+### 🛠️ CLI tools
+
+| Project | What it does |
+| --- | --- |
 | 📼 [**binrec**](https://github.com/JonDotsoy/binrec#readme) | Record and replay everything a command reads and writes, with transparent PATH shims, ndjson output and terminal or browser playback. |
-| 🔐 [**envs**](https://github.com/JonDotsoy/envs#readme) | CLI to manage the `.env` files of all your git worktrees from a single file: edit them together, sync them and lint them for security. |
+| 🔐 [**envs**](https://github.com/JonDotsoy/envs#readme) | Manage the `.env` files of all your git worktrees from a single file: edit them together, sync them and lint them for security. |
 | 🤵 [**smoking**](https://github.com/JonDotsoy/smoking#readme) | Smoke-test npm packages from a single `.donly` file. Each case runs in a throwaway directory and reports ✔ or ✘. |
+
+### 🧩 VS Code extensions
+
+| Project | What it does |
+| --- | --- |
+| 🌳 [**worktree**](https://github.com/JonDotsoy/worktree#readme) | List, open and create the git worktrees of a repository without leaving the editor. |
+
+### 📚 Resources
+
+| Project | What it does |
+| --- | --- |
+| ⭐ [**my-awesome**](https://github.com/JonDotsoy/my-awesome#readme) | A curated collection of useful tools and resources, organized by productivity, finance, communication, automation and learning. |
 
 ## 🧑‍🤝‍🧑 Communities
 
