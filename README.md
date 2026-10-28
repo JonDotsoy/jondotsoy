@@ -1,51 +1,36 @@
-### Hi there 👋
+### Hi there 👋 I'm Jonathan
 
-<!--
-**JonDotsoy/jondotsoy** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-
-Here are some ideas to get you started:
-
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+Software developer from Chile 🇨🇱. I build open source tools for the JavaScript/TypeScript ecosystem, and I help organize the [Chelas.js](https://www.chelajs.cl/) community.
 
 ## 🔭 Currently working on
 
-- ⭐ [actioman](https://github.com/JonDotsoy/actioman) Share functions with other JS clients. Call backend functions with type-safety.  `actioman` is in beta version `0.7.0` and we are integrating improvements 🛠️ in telemetry and configuration system.
-- [your-life-in-weeks](https://github.com/JonDotsoy/your-life-in-weeks?tab=readme-ov-file) This project is inspired by the article "Your Life in Weeks" published on Wait But Why, where Tim Urban illustrates the structure of a person's life from conception to old age.
-- [streamable-tools](https://github.com/JonDotsoy/streamable-tools) `streamable-tools` is a JS/TS library for easy stream manipulation in web apps, offering utilities like `MultiplyStream` for data propagation, `SplitStream` for data splitting, and tools for stream creation and control. Install with `npm add streamable-tools`
-- [ICalendar.JS](https://github.com/JonDotsoy/icalendar.js) standard library to parser ICalendar based on [RFC5545](https://www.rfc-editor.org/rfc/rfc5545.txt)
-- [commands-help](https://github.com/JonDotsoy/commands-help) List of commands for your shell
-- [feature-branching](https://github.com/JonDotsoy/feature-branching) to best workflows
+- ⭐ [actioman](https://github.com/JonDotsoy/actioman): share functions with other JS clients and call backend functions with type safety. Currently in beta (`0.7.0`), with ongoing improvements 🛠️ to telemetry and the configuration system.
+- [hotconfigs](https://github.com/JonDotsoy/configs#readme): reactive, typed configuration library for Node.js/TypeScript. Every field is a live store you can subscribe to, so your app reacts to env vars, files, HTTP/SSE feeds and more without a redeploy. Install it with `npm i hotconfigs`.
+- [your-life-in-weeks](https://github.com/JonDotsoy/your-life-in-weeks#readme): inspired by Tim Urban's "Your Life in Weeks" article on Wait But Why, it visualizes a whole life, week by week.
+- [streamable-tools](https://github.com/JonDotsoy/streamable-tools): JS/TS library for easy stream manipulation in web apps, with utilities like `MultiplyStream` to propagate data, `SplitStream` to split it, and helpers to create and control streams. Install it with `npm add streamable-tools`.
+- [ICalendar.JS](https://github.com/JonDotsoy/icalendar.js): standard library to parse iCalendar data, based on [RFC 5545](https://www.rfc-editor.org/rfc/rfc5545.txt).
+- [commands-help](https://github.com/JonDotsoy/commands-help): a list of handy commands for your shell.
+- [feature-branching](https://github.com/JonDotsoy/feature-branching): tooling for better branching workflows.
 
-
-## 🔬 Lab Projects
+## 🔬 Lab projects
 
 Some experimental projects.
 
-- [life-config](https://github.com/JonDotsoy/life-config#readme) Subscribe to remotely configurations like HTTP Source or file stream source. Install it with `npm i life-config`.
-- [artur](https://github.com/JonDotsoy/artur#readme) a little and modern framework to write modern apps.
-- 👷 Open-KV
-
+- [artur](https://github.com/JonDotsoy/artur#readme): a small, modern framework to write modern apps.
+- 👷 Open-KV (coming soon).
 
 ## ⏰ Maintaining
 
-- [ndate](https://github.com/JonDotsoy/ndate) Console command to render date on different formats. Install with `brew install jondotsoy/core/ndate`
-- [uid](https://github.com/JonDotsoy/uid) Generator of unique id with support to UUID, ULID, and ObjectID. Install with `brew install jondotsoy/core/uid`
-- [chelajs-website](https://github.com/Chelas-js/chelajs-website) Website for the Chelas-js community.
+- [ndate](https://github.com/JonDotsoy/ndate): console command to render dates in different formats. Install it with `brew install jondotsoy/core/ndate`.
+- [uid](https://github.com/JonDotsoy/uid): unique ID generator with support for UUID, ULID and ObjectID. Install it with `brew install jondotsoy/core/uid`.
+- [chelajs-website](https://github.com/Chelas-js/chelajs-website): website for the Chelas.js community.
 
 ## 🧑‍🤝‍🧑 Communities
 
-- [Chelas.js](https://www.chelajs.cl/) Comunidad de Javascript de Chile. We have successfully organized 2 meetups this year. Our first meetup was on January 11th at Cerveceria Berbazul Barrio Italia ([https://lu.ma/oz60roog](https://lu.ma/oz60roog)) and our second meetup was on February 22nd at Cerveceria HbH ([https://lu.ma/p3dvyve7](https://lu.ma/p3dvyve7)) with great success. We are planning our next meetup for March, dates to be confirmed. Check out all our events at [https://lu.ma/chelas.js](https://lu.ma/chelas.js).
-- [Javascript Chile](https://jschile.org/) Javascript Community from Chile.
-- [Tribu Latam](https://www.tribulatam.com/) Latam Community, Infrastructure and AI Fire Pit. I actively participate in the Infrastructure Fire Pit.  I invite you to participate in one of the fire pits here [https://www.tribulatam.com/fogones](https://www.tribulatam.com/fogones).
+- [Chelas.js](https://www.chelajs.cl/): JavaScript community from Chile. We run casual meetups in Santiago; check out past and upcoming events at [lu.ma/chelas.js](https://lu.ma/chelas.js).
+- [JavaScript Chile](https://jschile.org/): JavaScript community from Chile.
+- [Tribu Latam](https://www.tribulatam.com/): Latam community for infrastructure and AI "fogones" (fire pits). I actively take part in the infrastructure fire pit, and you're welcome to join one at [tribulatam.com/fogones](https://www.tribulatam.com/fogones).
 
 ## 📝 Articles
 
-- [Por qué usar Runbooks: Automatiza la documentación de escenarios reproducibles con IA](https://www.linkedin.com/pulse/por-qu%C3%A9-usar-runbooks-automatiza-la-documentaci%C3%B3n-de-jonathan-ufnbf) (es) - Aprenderás a crear runbooks y generar evidencia de su ejecución con ayuda de IA para documentar y validar escenarios reproducibles en tus proyectos. Published on 2026-02-01 by [@jondotsoy](https://github.com/jondotsoy).
+- [Por qué usar Runbooks: Automatiza la documentación de escenarios reproducibles con IA](https://www.linkedin.com/pulse/por-qu%C3%A9-usar-runbooks-automatiza-la-documentaci%C3%B3n-de-jonathan-ufnbf) (es, 2026-02-01): learn how to write runbooks and use AI to produce evidence of their execution, so you can document and validate reproducible scenarios in your projects.
