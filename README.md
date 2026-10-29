@@ -21,91 +21,71 @@ Open source tools for the JavaScript/TypeScript ecosystem · Community organizer
 
 ## 🚀 Projects
 
-<table>
-  <tr>
-    <th colspan="2" align="left">📦 Libraries & formats</th>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>🔥 <a href="https://github.com/JonDotsoy/configs#readme">hotconfigs</a></h3>
-      <p>Reactive, typed configuration library for Node.js/TypeScript. Every field is a live store, so your app reacts to env vars, files and HTTP/SSE feeds without a redeploy.</p>
-      <p><code>npm i hotconfigs</code></p>
-      <a href="https://www.npmjs.com/package/hotconfigs"><img alt="npm version" src="https://img.shields.io/npm/v/hotconfigs?style=flat-square&logo=npm&color=CB3837"></a>
-      <a href="https://github.com/JonDotsoy/configs"><img alt="GitHub stars" src="https://img.shields.io/github/stars/JonDotsoy/configs?style=flat-square&logo=github"></a>
-    </td>
-    <td width="50%" valign="top">
-      <h3>📜 <a href="https://github.com/JonDotsoy/donly#readme">donly</a></h3>
-      <p>DON (Directive Object Notation): a human-readable text format for exchanging directive objects between applications.</p>
-      <a href="https://github.com/JonDotsoy/donly"><img alt="GitHub stars" src="https://img.shields.io/github/stars/JonDotsoy/donly?style=flat-square&logo=github"></a>
-    </td>
-  </tr>
-  <tr>
-    <th colspan="2" align="left">🛠️ CLI tools</th>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>📼 <a href="https://github.com/JonDotsoy/binrec#readme">binrec</a></h3>
-      <p>Record and replay everything a command reads and writes, with transparent PATH shims, ndjson output and terminal or browser playback.</p>
-      <a href="https://github.com/JonDotsoy/binrec"><img alt="GitHub stars" src="https://img.shields.io/github/stars/JonDotsoy/binrec?style=flat-square&logo=github"></a>
-    </td>
-    <td width="50%" valign="top">
-      <h3>🔐 <a href="https://github.com/JonDotsoy/envs#readme">envs</a></h3>
-      <p>Manage the <code>.env</code> files of all your git worktrees from a single file: edit them together, sync them and lint them for security.</p>
-      <a href="https://github.com/JonDotsoy/envs"><img alt="GitHub stars" src="https://img.shields.io/github/stars/JonDotsoy/envs?style=flat-square&logo=github"></a>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>🤵 <a href="https://github.com/JonDotsoy/smoking#readme">smoking</a></h3>
-      <p>Smoke-test npm packages from a single <code>.donly</code> file. Each case runs in a throwaway directory and reports ✔ or ✘.</p>
-      <a href="https://github.com/JonDotsoy/smoking"><img alt="GitHub stars" src="https://img.shields.io/github/stars/JonDotsoy/smoking?style=flat-square&logo=github"></a>
-    </td>
-    <td width="50%" valign="top"></td>
-  </tr>
-  <tr>
-    <th align="left">🧩 VS Code extensions</th>
-    <th align="left">📚 Resources</th>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>🌳 <a href="https://github.com/JonDotsoy/worktree#readme">worktree</a></h3>
-      <p>List, open and create the git worktrees of a repository without leaving the editor.</p>
-      <a href="https://github.com/JonDotsoy/worktree"><img alt="GitHub stars" src="https://img.shields.io/github/stars/JonDotsoy/worktree?style=flat-square&logo=github"></a>
-    </td>
-    <td width="50%" valign="top">
-      <h3>⭐ <a href="https://github.com/JonDotsoy/my-awesome#readme">my-awesome</a></h3>
-      <p>A curated collection of useful tools and resources, organized by productivity, finance, communication, automation and learning.</p>
-      <a href="https://github.com/JonDotsoy/my-awesome"><img alt="GitHub stars" src="https://img.shields.io/github/stars/JonDotsoy/my-awesome?style=flat-square&logo=github"></a>
-    </td>
-  </tr>
-</table>
+### 📦 Libraries & formats
+
+#### 🔥 [hotconfigs](https://github.com/JonDotsoy/configs#readme)
+
+[![npm version](https://img.shields.io/npm/v/hotconfigs?style=flat-square&logo=npm&color=CB3837)](https://www.npmjs.com/package/hotconfigs)
+[![GitHub stars](https://img.shields.io/github/stars/JonDotsoy/configs?style=flat-square&logo=github)](https://github.com/JonDotsoy/configs)
+
+Reactive, typed configuration library for Node.js/TypeScript. Every field is a live store, so your app reacts to env vars, files and HTTP/SSE feeds without a redeploy.
+
+```sh
+npm i hotconfigs
+```
+
+#### 📜 [donly](https://github.com/JonDotsoy/donly#readme)
+
+[![GitHub stars](https://img.shields.io/github/stars/JonDotsoy/donly?style=flat-square&logo=github)](https://github.com/JonDotsoy/donly)
+
+DON (Directive Object Notation): a human-readable text format for exchanging directive objects between applications.
+
+### 🛠️ CLI tools
+
+#### 📼 [binrec](https://github.com/JonDotsoy/binrec#readme)
+
+[![GitHub stars](https://img.shields.io/github/stars/JonDotsoy/binrec?style=flat-square&logo=github)](https://github.com/JonDotsoy/binrec)
+
+Record and replay everything a command reads and writes, with transparent PATH shims, ndjson output and terminal or browser playback.
+
+#### 🔐 [envs](https://github.com/JonDotsoy/envs#readme)
+
+[![GitHub stars](https://img.shields.io/github/stars/JonDotsoy/envs?style=flat-square&logo=github)](https://github.com/JonDotsoy/envs)
+
+Manage the `.env` files of all your git worktrees from a single file: edit them together, sync them and lint them for security.
+
+#### 🤵 [smoking](https://github.com/JonDotsoy/smoking#readme)
+
+[![GitHub stars](https://img.shields.io/github/stars/JonDotsoy/smoking?style=flat-square&logo=github)](https://github.com/JonDotsoy/smoking)
+
+Smoke-test npm packages from a single `.donly` file. Each case runs in a throwaway directory and reports ✔ or ✘.
+
+### 🧩 VS Code extensions
+
+#### 🌳 [worktree](https://github.com/JonDotsoy/worktree#readme)
+
+[![GitHub stars](https://img.shields.io/github/stars/JonDotsoy/worktree?style=flat-square&logo=github)](https://github.com/JonDotsoy/worktree)
+
+List, open and create the git worktrees of a repository without leaving the editor.
+
+### 📚 Resources
+
+#### ⭐ [my-awesome](https://github.com/JonDotsoy/my-awesome#readme)
+
+[![GitHub stars](https://img.shields.io/github/stars/JonDotsoy/my-awesome?style=flat-square&logo=github)](https://github.com/JonDotsoy/my-awesome)
+
+A curated collection of useful tools and resources, organized by productivity, finance, communication, automation and learning.
 
 ## 🧑‍🤝‍🧑 Communities
 
-<table>
-  <tr>
-    <td width="33%" valign="top">
-      <h3>🍻 <a href="https://www.chelajs.cl/">Chelas.js</a></h3>
-      <p>JavaScript community from Chile. We run casual meetups in Santiago.</p>
-      <p>📅 <a href="https://lu.ma/chelas.js">Past and upcoming events</a></p>
-    </td>
-    <td width="33%" valign="top">
-      <h3>🟨 <a href="https://jschile.org/">JavaScript Chile</a></h3>
-      <p>JavaScript community from Chile.</p>
-    </td>
-    <td width="33%" valign="top">
-      <h3>🔥 <a href="https://www.tribulatam.com/">Tribu Latam</a></h3>
-      <p>Latam community for infrastructure and AI "fogones" (fire pits). I actively take part in the infrastructure fire pit.</p>
-      <p>🪵 <a href="https://www.tribulatam.com/fogones">Join a fogón</a></p>
-    </td>
-  </tr>
-</table>
+- 🍻 **[Chelas.js](https://www.chelajs.cl/)**: JavaScript community from Chile. We run casual meetups in Santiago. 📅 [Past and upcoming events](https://lu.ma/chelas.js)
+- 🟨 **[JavaScript Chile](https://jschile.org/)**: JavaScript community from Chile.
+- 🔥 **[Tribu Latam](https://www.tribulatam.com/)**: Latam community for infrastructure and AI "fogones" (fire pits). I actively take part in the infrastructure fire pit. 🪵 [Join a fogón](https://www.tribulatam.com/fogones)
 
 ## 📝 Articles
 
-| Date       | Article                                                                                                                                                                                                                                                                                                                                                                          | Lang  |
-| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
-| 2026-02-01 | **[Por qué usar Runbooks: Automatiza la documentación de escenarios reproducibles con IA](https://www.linkedin.com/pulse/por-qu%C3%A9-usar-runbooks-automatiza-la-documentaci%C3%B3n-de-jonathan-ufnbf)**<br><sub>Learn how to write runbooks and use AI to produce evidence of their execution, so you can document and validate reproducible scenarios in your projects.</sub> | 🇪🇸 es |
+- 🇪🇸 **[Por qué usar Runbooks: Automatiza la documentación de escenarios reproducibles con IA](https://www.linkedin.com/pulse/por-qu%C3%A9-usar-runbooks-automatiza-la-documentaci%C3%B3n-de-jonathan-ufnbf)**<br>
+  <sub>2026-02-01 · Learn how to write runbooks and use AI to produce evidence of their execution, so you can document and validate reproducible scenarios in your projects.</sub>
 
 ---
 
