@@ -64,9 +64,12 @@ Smoke-test npm packages from a single `.donly` file. Each case runs in a throwaw
 
 #### 🌳 [worktree](https://github.com/JonDotsoy/worktree#readme)
 
+[![VS Marketplace](https://img.shields.io/visual-studio-marketplace/v/jondotsoy.worktree?style=flat-square&logo=visualstudiocode&label=VS%20Marketplace&color=007ACC)](https://marketplace.visualstudio.com/items?itemName=jondotsoy.worktree)
 [![GitHub stars](https://img.shields.io/github/stars/JonDotsoy/worktree?style=flat-square&logo=github)](https://github.com/JonDotsoy/worktree)
 
 List, open and create the git worktrees of a repository without leaving the editor.
+
+👉 [Install from the VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=jondotsoy.worktree) or run `code --install-extension jondotsoy.worktree`
 
 ### 📚 Resources
 
