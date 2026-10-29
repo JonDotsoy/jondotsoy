@@ -47,6 +47,14 @@ Record and replay everything a command reads and writes, with transparent PATH s
 
 Manage the `.env` files of all your git worktrees from a single file: edit them together, sync them and lint them for security.
 
+#### 🕒 [ndate](https://github.com/JonDotsoy/ndate#readme)
+
+Format dates in the console: pick locale, time zone and date/time style, convert to epoch or JSON, use custom templates, or read dates from stdin. Ships with zsh and bash completions.
+
+```sh
+brew install jondotsoy/core/ndate
+```
+
 #### 🤵 [smoking](https://github.com/JonDotsoy/smoking#readme)
 
 Smoke-test npm packages from a single `.donly` file. Each case runs in a throwaway directory and reports ✔ or ✘.
