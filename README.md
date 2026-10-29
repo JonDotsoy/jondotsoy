@@ -26,7 +26,6 @@ Open source tools for the JavaScript/TypeScript ecosystem · Community organizer
 #### 🔥 [hotconfigs](https://github.com/JonDotsoy/configs#readme)
 
 [![npm version](https://img.shields.io/npm/v/hotconfigs?style=flat-square&logo=npm&color=CB3837)](https://www.npmjs.com/package/hotconfigs)
-[![GitHub stars](https://img.shields.io/github/stars/JonDotsoy/configs?style=flat-square&logo=github)](https://github.com/JonDotsoy/configs)
 
 Reactive, typed configuration library for Node.js/TypeScript. Every field is a live store, so your app reacts to env vars, files and HTTP/SSE feeds without a redeploy.
 
@@ -36,27 +35,19 @@ npm i hotconfigs
 
 #### 📜 [donly](https://github.com/JonDotsoy/donly#readme)
 
-[![GitHub stars](https://img.shields.io/github/stars/JonDotsoy/donly?style=flat-square&logo=github)](https://github.com/JonDotsoy/donly)
-
 DON (Directive Object Notation): a human-readable text format for exchanging directive objects between applications.
 
 ### 🛠️ CLI tools
 
 #### 📼 [binrec](https://github.com/JonDotsoy/binrec#readme)
 
-[![GitHub stars](https://img.shields.io/github/stars/JonDotsoy/binrec?style=flat-square&logo=github)](https://github.com/JonDotsoy/binrec)
-
 Record and replay everything a command reads and writes, with transparent PATH shims, ndjson output and terminal or browser playback.
 
 #### 🔐 [envs](https://github.com/JonDotsoy/envs#readme)
 
-[![GitHub stars](https://img.shields.io/github/stars/JonDotsoy/envs?style=flat-square&logo=github)](https://github.com/JonDotsoy/envs)
-
 Manage the `.env` files of all your git worktrees from a single file: edit them together, sync them and lint them for security.
 
 #### 🤵 [smoking](https://github.com/JonDotsoy/smoking#readme)
-
-[![GitHub stars](https://img.shields.io/github/stars/JonDotsoy/smoking?style=flat-square&logo=github)](https://github.com/JonDotsoy/smoking)
 
 Smoke-test npm packages from a single `.donly` file. Each case runs in a throwaway directory and reports ✔ or ✘.
 
@@ -65,7 +56,6 @@ Smoke-test npm packages from a single `.donly` file. Each case runs in a throwaw
 #### 🌳 [worktree](https://github.com/JonDotsoy/worktree#readme)
 
 [![VS Marketplace](https://img.shields.io/visual-studio-marketplace/v/jondotsoy.worktree?style=flat-square&logo=visualstudiocode&label=VS%20Marketplace&color=007ACC)](https://marketplace.visualstudio.com/items?itemName=jondotsoy.worktree)
-[![GitHub stars](https://img.shields.io/github/stars/JonDotsoy/worktree?style=flat-square&logo=github)](https://github.com/JonDotsoy/worktree)
 
 List, open and create the git worktrees of a repository without leaving the editor.
 
@@ -74,8 +64,6 @@ List, open and create the git worktrees of a repository without leaving the edit
 ### 📚 Resources
 
 #### ⭐ [my-awesome](https://github.com/JonDotsoy/my-awesome#readme)
-
-[![GitHub stars](https://img.shields.io/github/stars/JonDotsoy/my-awesome?style=flat-square&logo=github)](https://github.com/JonDotsoy/my-awesome)
 
 A curated collection of useful tools and resources, organized by productivity, finance, communication, automation and learning.
 
